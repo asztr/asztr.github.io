@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Mixing Modalities of 3D Sketching and Speech for Interactive Model Retrieval in Virtual Reality</title>
+<link rel="stylesheet" type="text/css" href="fontello/css/fontello-embedded.css">
+<link rel="stylesheet" type="text/css" href="typora.css">
+</head>
+<body class='typora-export'>
+	<div id='write'  class=''>
+		<h1>
+			<a name="div-styletext-align-centera-novel-dynamic-asset-allocation-system-using-feature-saliency-hidden-markov-models-for-smart-beta-investingdiv" class="md-header-anchor"></a>
+			<div style="text-align: center;"><span>Mixing Modalities of 3D Sketching and Speech for Interactive Model Retrieval in Virtual Reality</span></div>
+		</h1>
+		<ul>
+			<li><b style="font-size: 1.2em"><a href="https://scholar.google.com/citations?user=04u9QAIAAAAJ&hl=it">Daniele Giunchi</a><sup>1</sup></b></li>
+			<li><b style="font-size: 1.2em"><a href="http://www0.cs.ucl.ac.uk/staff/A.Sztrajman/webpage/">Alejandro Sztrajman</a><sup>1</sup></b></li>
+			<li><b style="font-size: 1.2em"><a href="https://stuart-james.com/">Stuart James</a><sup>2</sup></b></li>
+			<li><b style="font-size: 1.2em"><a href="https://wp.cs.ucl.ac.uk/anthonysteed/">Anthony Steed</a><sup>1</sup></b></li>
+		</ul>
+		<ul>
+			<sup>1</sup>Department of Computer Science, University College London, United Kingdom.<br>
+			<sup>2</sup>Visual Geometry and Modelling Lab (VGM), Istituto Italiano di Tecnologia, Italy.<br>
+			<br>
+			<i>ACM International Conference on Interactive Media Experiences</i>, 2021.
+			<p>&nbsp;</p>
+		</ul>
+		<!--<ul>
+			<li><a href=""><button class="button">Paper</button></a></li>
+			<li><button class="button">Github</button> </li>
+			<li><button class="button">Slides</button></li>
+		</ul>-->
+<!-- 		<p>&nbsp;</p> -->
+<!-- 		<p>&nbsp;</p> -->
+		<center>
+			<figure>
+				<img src="./imgs/teaser1-lr.jpg" style="height:270px;">&emsp;<img src="imgs/teaser2-lr.jpg" style="height:270px;">
+<!-- 				<img src="imgs/setup3.png" style="height:250px;">&emsp;<img src="imgs/setup4_3.png" style="height:250px;"> -->
+<!-- 				<img src="imgs/QueriesBlocks2.png" style="width:100%;"> -->
+				<br>
+<!-- 				<figcaption></figcaption> -->
+			</figure>
+		</center>
+		<!--<p>&nbsp;</p>
+		<hr />
+		<h2>
+			<a name="abstract" class="md-header-anchor"></a><span>Abstract</span>
+		</h2>-->
+		<p><span>Sketch and speech are intuitive interaction methods that convey complementary information and have been independently used for 3D model retrieval in virtual environments. While sketch has been shown to be an effective retrieval method, not all collections are easily navigable using this modality alone. We design a new database of 3D chairs where each of the pieces (arms, legs, seat, back) are colored, challenging for sketch. To overcome this, we implement a multi-modal interface for querying 3D model databases within a virtual environment. We base the sketch on the state-of-the-art for 3D Sketch Retrieval and use a Wizard-of-Oz style experiment to process the voice input. We avoid the complexities of natural language processing that frequently require fine-tuning to be robust to accent. We conduct two user studies and show that hybrid search strategies emerge from the combination of interactions, fostering the advantages provided by both modalities.</span></p>
+		<p>&nbsp;</p>
+		<ul>
+			<!-- https://arxiv.org/pdf/2105.02139.pdf -->
+			<li><i class="icon-book-open-1"></i><a href="./giunchi-etal_imx21.pdf">Paper</a><br><font style='font-size:14px;'>PDF 39 MB</font></li>
+			<li><i class="icon-book-open-1"></i><a href="./giunchi-etal_imx21_lowres.pdf">Paper (lowres)</a><br><font style='font-size:14px;'>PDF 6.3 MB</font></li>
+			<li><i class="icon-book-open-1"></i><a href="./imx21c-sub1037-i11.pdf">Supplemental</a><br><font style='font-size:14px;'>PDF 7.6 MB</font></li>
+			<!--<li style="vertical-align:top;"><i class="icon-github-circled"></i><a href="./">Code</a><font style='font-size:14px;'></font></li>-->
+		</ul>
+		<p>&nbsp;</p>
+
+		<hr />
+		<h2>
+			<a name="dataset" class="md-header-anchor"></a><span>Dataset</span>
+		</h2>
+		<center>
+			<figure>
+				<a href=""><img src="imgs/dataset-lr.jpg" style="width:90%;"></a>
+				<br>
+				<br>
+				<figcaption>
+					Our dataset contains 16200 chairs generated from 45 different shapes extracted from ShapeNet. Each shape is segmented in 4 parts (seat, back, legs and arms). We assign colors from a fixed set of 6 to each part following a permutation without repetitions in the same chair.
+				</figcaption>
+			</figure>
+		</center>
+		<p>&nbsp;</p>
+		<ol>
+			<li><i class="icon-floppy-1"></i><a href="./dataset/chairs_database.zip">chairs_database.zip</a><font style='font-size:14px;'> (313 MB)</font></li>
+		</ol>
+		<ol>
+			<i class="icon-floppy-1"></i><a href="./dataset/features_dictionary.xlsx">features_dictionary.xlsx</a><font style='font-size:14px;'> (0.3 MB)</font>
+		</ol>
+		<ol>
+			<li><i class="icon-floppy-1"></i><a href="./dataset/segmented_chairs.unitypackage">segmented_chairs.unitypackage</a><font style='font-size:14px;'> (98 MB)</font></li>
+		</ol>
+		<p>&nbsp;</p>
+		<hr />
+		<h2>
+			<a name="paper" class="md-header-anchor"></a><span>Paper</span>
+		</h2>
+		<p><kbd style="display:inline-block"><a href="./giunchi-etal_imx21_lowres.pdf"><img src="imgs/paper-montage-lr.jpg"></a></kbd></p>
+		<p>&nbsp;</p>
+		<hr />
+		<h2>
+			<a name="bibtex" class="md-header-anchor"></a><span>Bibtex</span>
+		</h2>
+		<pre lang="latex" class="md-fences md-end-block ty-contain-cm modeLoaded md-focus" spellcheck="false"><div class="CodeMirror cm-s-inner CodeMirror-wrap CodeMirror-focused" lang="latex"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 81.0185px; left: 151.566px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">@inproceedings<span class="cm-bracket">{</span>giunchi2021imx,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  author = <span class="cm-bracket">{</span>Giunchi, Daniele and Sztrajman, Alejandro and James, Stuart and Steed, Anthony<span class="cm-bracket">}</span>,</span></pre></div><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  title = <span class="cm-bracket">{</span>Mixing Modalities of 3D Sketching and Speech for Interactive Model Retrieval in Virtual Reality<span class="cm-bracket">}</span>,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  year = <span class="cm-bracket">{</span><span class="cm-atom">2021</span><span class="cm-bracket">}</span>,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  month = <span class="cm-bracket">{</span>June<span class="cm-bracket">}</span>,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  address = <span class="cm-bracket">{</span>New York, NY, USA<span class="cm-bracket">}</span>,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  booktitle = <span class="cm-bracket">{</span>ACM International Conference on Interactive Media Experiences<span class="cm-bracket">}</span>,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  numpages = <span class="cm-bracket">{</span><span class="cm-atom">17</span><span class="cm-bracket">}</span>,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  location = <span class="cm-bracket">{</span>New York, NY, USA<span class="cm-bracket">}</span>,</span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  series = <span class="cm-bracket">{</span>IMX'21<span class="cm-bracket">}</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-bracket">}</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 263px;"></div><div class="CodeMirror-gutters" style="display: none; height: 263px;"></div></div></div></pre><p>&nbsp;</p>
+		<!-- <p>&nbsp;</p>
+		<hr />
+		<h2>
+			<a name="acknowledgement" class="md-header-anchor"></a><span>Acknowledgement</span>
+		</h2>
+		<p><span>This project has received funding from the European Union’s Horizon 2020 research and innovation program under the Marie Skłodowska-Curie grant agreement No 642841.
+		The webpage template was inspired by <a href="https://elifons.github.io/assets/papers/icassp2021.html">this project</a>. -->
+	</div>
+</body>
+</html>

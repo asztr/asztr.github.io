@@ -1,0 +1,1647 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<title>WebGL NBRDF</title>
+	<meta charset="utf-8"></meta>
+</head>
+
+<!-- <body style="background: #191919"> -->
+<body style="background: #ffffff">
+
+<link href="css/sandbox.css" rel="stylesheet" type="text/css"/>
+<link href="css/super_slider.css" media="screen" rel="stylesheet" type="text/css"/>
+<link href="css/super_picker.css" media="screen" rel="stylesheet" type="text/css"/>
+<link href="css/plugin.css" media="screen" rel="stylesheet" type="text/css"/>
+<link href="css/ace_theme_tweaks.css" rel="stylesheet" type="text/css"/>
+<link href="css/jquery.ui.resizable.css" rel="stylesheet">
+
+<!--<script src="images/envmaps.js"></script>-->
+<!--<script src="images/nbrdf_21x21exp_nic.js"></script>-->
+<script src="https://cdn.statically.io/gh/asztr/nbrdf/main/envmaps.min.js"></script>
+<script src="https://cdn.statically.io/gh/asztr/nbrdf/main/nbrdf_21x21exp_nic.min.js"></script>
+
+<!--<div id="peekaboo" style="display: none; float: left; margin: 0px 0px 0px 0px; width: 500px; height: 500px; position: relative">
+	<pre id="editor"></pre>
+</div>
+
+<div id="stuff" style="display: none; overflow: auto; height: 100%">-->
+
+<div style="float: left; width: 768px; margin-left: 15%">
+		<div id="effect" style="width: 384px; height: 384px; float: left; position: relative;" >
+		</div>
+<!--	<div id="status" style="min-width: 496px">
+			<p id="status_text"><b>Press ESC to toggle code editor</b></p>
+		</div>-->
+		<br>
+		<br>
+		<br>
+		<br>
+		<div id="params" style="vertical-align:middle;"></div>
+</div>
+
+<script>
+	function Color(r, g, b) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+	}
+</script>
+
+<script src="js/color_picker.js" type="text/javascript"></script>
+<script src="js/jquery-1.6.1.min.js"></script>
+<script src="js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/ace/theme-clouds_midnight.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/ace/mode-glsl.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/super_picker.js" type="text/javascript"></script>
+<script src="js/super_slider.js" type="text/javascript"></script>
+<script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
+
+<script src="js/macton/macton-utils.js" type="text/javascript"></script>
+<script src="js/macton/macton-gl-utils.js" type="text/javascript"></script>
+<script src="js/macton/webgl-utils.js" type="text/javascript"></script>
+<script src="js/macton/matrix4x4.js" type="text/javascript"></script>
+<script src="js/macton/cameracontroller.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="js/simple-rotator.js"></script>
+
+<script src="js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
+
+<script>
+	// create material select
+	var setupMaterialSelect = function() { selectValues = { "0": "alum-bronze", "1": "alumina-oxide", "2": "aluminium", "3": "aventurnine", "4": "beige-fabric", "5": "black-fabric", "6": "black-obsidian", "7": "black-oxidized-steel", "8": "black-phenolic", "9": "black-soft-plastic", "10": "blue-acrylic", "11": "blue-fabric", "12": "blue-metallic-paint2", "13": "blue-metallic-paint", "14": "blue-rubber", "15": "brass", "16": "cherry-235", "17": "chrome", "18": "chrome-steel", "19": "colonial-maple-223", "20": "color-changing-paint1", "21": "color-changing-paint2", "22": "color-changing-paint3", "23": "dark-blue-paint", "24": "dark-red-paint", "25": "dark-specular-fabric", "26": "delrin", "27": "fruitwood-241", "28": "gold-metallic-paint2", "29": "gold-metallic-paint3", "30": "gold-metallic-paint", "31": "gold-paint", "32": "gray-plastic", "33": "grease-covered-steel", "34": "green-acrylic", "35": "green-fabric", "36": "green-latex", "37": "green-metallic-paint2", "38": "green-metallic-paint", "39": "green-plastic", "40": "hematite", "41": "ipswich-pine-221", "42": "light-brown-fabric", "43": "light-red-paint", "44": "maroon-plastic", "45": "natural-209", "46": "neoprene-rubber", "47": "nickel", "48": "nylon", "49": "orange-paint", "50": "pearl-paint", "51": "pickled-oak-260", "52": "pink-fabric2", "53": "pink-fabric", "54": "pink-felt", "55": "pink-jasper", "56": "pink-plastic", "57": "polyethylene", "58": "polyurethane-foam", "59": "pure-rubber", "60": "purple-paint", "61": "pvc", "62": "red-fabric2", "63": "red-fabric", "64": "red-metallic-paint", "65": "red-phenolic", "66": "red-plastic", "67": "red-specular-plastic", "68": "silicon-nitrade", "69": "silver-metallic-paint2", "70": "silver-metallic-paint", "71": "silver-paint", "72": "special-walnut-224", "73": "specular-black-phenolic", "74": "specular-blue-phenolic", "75": "specular-green-phenolic", "76": "specular-maroon-phenolic", "77": "specular-orange-phenolic", "78": "specular-red-phenolic", "79": "specular-violet-phenolic", "80": "specular-white-phenolic", "81": "specular-yellow-phenolic", "82": "ss440", "83": "steel", "84": "teflon", "85": "tungsten-carbide", "86": "two-layer-gold", "87": "two-layer-silver", "88": "violet-acrylic", "89": "violet-rubber", "90": "white-acrylic", "91": "white-diffuse-bball", "92": "white-fabric2", "93": "white-fabric", "94": "white-marble", "95": "white-paint", "96": "yellow-matte-plastic", "97": "yellow-paint", "98": "yellow-phenolic", "99": "yellow-plastic" };
+	$.each(selectValues, function(key, value) {   
+	$('#materialsSelect')
+		.append($("<option></option>")
+		.attr("value",key)
+		.text(value)); 
+	});
+};
+
+	// create envmap select
+	var setupEnvmapSelect = function() { selectValues = { "0": "Grace Cathedral", "1" : "Eucalyptus", "2" : "Stock House" };
+	$.each(selectValues, function(key, value) {   
+	$('#EMSelect')
+		.append($("<option></option>")
+		.attr("value",key)
+		.text(value)); 
+	});
+};
+
+// the set of fit lambda values for our vMF importance-sampling
+var vMFLambdas = [15.3045, 139.355, 45.9895, 37.325, 2.05984, 2.58438, 69.1255, 7.41293, 57.1422, 3.55634, 78.5601, 1.93206, 32.9846, 3.4533, 7.05827, 17.1823, 6.1933, 80.4625, 43.9204, 5.16041, 39.2527, 14.5166, 36.853, 4.35985, 4.10734, 5.68461, 5.44181, 11.831, 9.21984, 7.12352, 3.19888, 4.50446, 51.9949, 72.034, 113.529, 2.49993, 2.23464, 25.3667, 7.91936, 58.3473, 22.2198, 5.50706, 2.43796, 3.70472, 67.5253, 5.61586, 13.1516, 52.0297, 3.79411, 3.66209, 4.90991, 4.92492, 1.93947, 2.02252, 1.91213, 60.3022, 3.75174, 2.24025, 1.86834, 8.15529, 13.7359, 20.9147, 2.29402, 2.32681, 19.7779, 8.30064, 4.51422, 19.9406, 73.7704, 1.75878, 3.3963, 5.79544, 5.66865, 52.8386, 60.258, 69.1558, 89.0835, 55.2677, 89.1762, 70.7936, 71.0918, 91.9312, 58.0967, 38.2514, 11.6763, 57.8295, 5.76489, 3.52544, 17.6961, 3.89824, 134.499, 12.7295, 1.67194, 2.15357, 64.7383, 130.644, 37.6429, 4.64261, 58.9106, 4.13796 ];
+var vmf_idx = 0;
+</script>
+
+<script>
+var em_idx = 0;
+var g_vshader = null;
+
+var g_param_types = {};
+var g_params = {};
+var g_param_edited = {};
+var g_param_default = {};
+
+var g_sample_count = 0;
+
+var bindSlider = function(name, label, default_value, value, state) {
+	var slider = new SuperSlider(name, {
+		label: label,
+		default_value: default_value,
+		value: value,
+		min:  state.min,
+		max:  state.max,
+		step: state.step });
+
+	slider.bind("change", function(event) {
+		g_params[name] = event.target.val;
+		g_param_edited[name] = true;
+		g_sample_count = 0;
+
+		// restart the rendering and accumulation
+		parameters.start_time = new Date().getTime() - 0.01;
+		gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);
+		gl.clearColor(0, 0, 0, 0);
+	    gl.clear(gl.COLOR_BUFFER_BIT);
+
+	});
+
+	slider.bind("reset", function(event) {
+		g_param_edited[name] = undefined;
+		g_sample_count = 0;
+	});
+
+	return slider;
+}
+
+var bindPicker = function(name, label, default_value, value) {
+	var picker = new SuperPicker(name, {
+		label: "label",
+		default_value: default_value,
+		value: value,
+		callback: function(col) {
+			g_params[name] = col;
+			g_param_edited[name] = true;
+			g_sample_count = 0;
+		}
+	});
+
+	picker.bind("reset", function (event) {
+		g_param_edited[name] = undefined;
+		g_sample_count = 0;
+	});
+
+	return picker;
+}
+
+var bindCheckbox = function(name, label, value) {
+	var control = $("<input>")
+		.attr({ type: "checkbox", /*id: name,*/ checked: value })
+		.css("margin", "0 0 0 4px");
+
+	var cb_label = $("<label>")
+		.attr("for", name)
+		.text(label)
+		.addClass("checkbox_label");
+
+	cb_label.append(control);
+
+	control.bind("change", function (event) {
+		g_params[name] = event.target.checked;
+		g_param_edited[name] = true;
+
+		// restart the rendering and accumulation
+		parameters.start_time = new Date().getTime() - 0.01;
+		gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);
+		gl.clearColor(0, 0, 0, 0);
+	    gl.clear(gl.COLOR_BUFFER_BIT);
+
+	});
+
+	cb_label.bind("click", function (event) {
+		control.prop("checked", g_param_default[name]);
+		control.trigger("change");
+		g_param_edited[name] = undefined;
+	});
+
+	control.bind("click", function (event) {
+		event.stopPropagation();
+	});
+
+	return cb_label;
+}
+
+var bindSelect = function(name, label, value) {
+    var control = $('<select>')
+		.attr({ id: label })
+        .css("margin", "0 0 0 0");
+
+    var ms_label = $("<div>");
+    ms_label.append(control);
+
+	control.bind("change", function (event) {
+		g_params[name] = event.target.selectedIndex;
+		g_param_edited[name] = true;
+		g_sample_count = 0;
+		// $('#accumulationCheckbox').trigger("click");
+
+		// DN: update the vMF lambda according to the selected material
+		if( label === "materialsSelect") {
+			vmf_idx = event.target.selectedIndex;
+		} else if( label === "EMSelect" ) {
+			em_idx = event.target.selectedIndex;
+			loadHDRCubeMap(em_idx);
+		}
+
+		// restart the rendering and accumulation
+		parameters.start_time = new Date().getTime() - 0.01;
+		gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);
+		gl.clearColor(0, 0, 0, 0);
+	    gl.clear(gl.COLOR_BUFFER_BIT);
+	});
+
+	control.bind("click", function (event) {
+	    event.stopPropagation();
+	});
+
+	return ms_label;
+}
+</script>
+
+<script type="text/javascript">
+/**
+ * Provides requestAnimationFrame in a cross browser way.
+ * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+ */
+if (!window.requestAnimationFrame) {
+	window.requestAnimationFrame = (function() {
+		return window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame   ||
+		window.msRequestAnimationFrame  ||
+		function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+			window.setTimeout(callback, 1000/60);
+		};
+	})();
+}
+</script>
+
+<script id="mis_blit-vs" type="x-shader/x-vertex">
+attribute vec3 position;
+void main() {
+    gl_Position = vec4(position, 1.0);
+}
+</script>
+
+<script id="mis_blit-fs" type="x-shader/x-fragment">
+uniform vec2 resolution;
+uniform sampler2D tex;
+const float gamma = 2.2;
+
+vec3 PowVec3(vec3 v, float p) { return vec3(pow(v.x, p), pow(v.y, p), pow(v.z, p)); }
+vec3 ToLinear(vec3 v) { return PowVec3(v,     gamma); }
+vec3 ToSRGB(vec3 v)   { return PowVec3(v, 1.0/gamma); }
+
+void main() {
+    vec2 pos = gl_FragCoord.xy/resolution;
+	vec4 col = texture2D(tex, pos);
+	col /= col.w;
+	col.rgb = ToSRGB(col.rgb);
+    gl_FragColor = vec4(col);
+}
+</script>
+
+<script id="ubertexture-vs" type="x-shader/x-vertex">
+attribute vec3 position;
+void main() {
+    gl_Position = vec4(position, 1.0);
+}
+</script>
+
+<script id="ubertexture-fs" type="x-shader/x-fragment">
+// !!!!!!!!!!!!!!!!!!!!!!!!!!
+// DO NOT EDIT THESE LINES
+// !!!!!!!!!!!!!!!!!!!!!!!!!!
+// bind materialId {label:"materialsSelect", default:0, min:0, max:99, step:1}
+uniform int materialId;
+
+// bind hdrEnvSampler {label:"EMSelect", default:0, min:0, max:3, step:1}
+uniform samplerCube hdrEnvSampler;
+
+uniform sampler2D uberTextureSampler;
+
+// bind intensity_scaler {label:"Light intensity", default:1.0, min:0.01, max:10.0, step:0.1}
+uniform float intensity_scaler;
+
+// bind NUM_SAMPS_PER_FRAME {label:"Samples per frame", default:2.0, min:1.0, max:256.0, step:2.0}
+uniform float NUM_SAMPS_PER_FRAME;
+
+uniform mat4  view;
+uniform vec2  resolution;
+uniform float vmf_lambda;
+uniform float time;
+// !!!!!!!!!!!!!!!!!!!!!!!!!!
+
+const float M_PI = 3.14159265359;
+const float INV_PI = 1.0 / 3.14159265359;
+const float M_PI_2 = 1.57079632679;
+
+// random number generator
+// seed is generated using time and pixel coord (see main())
+float seed;
+float oldrand() { 
+    return fract( sin( seed++ ) * 43758.5453123 );
+}
+
+vec4 seedvec;
+float rand()
+{
+	const vec4 q = vec4(1225.0,1585.0,2457.0,2098.0);
+	const vec4 r = vec4(1112.0,367.0,92.0,265.0);
+	const vec4 a = vec4(3423.0,2646.0,1707.0,1999.0);
+	const vec4 m = vec4(4194287.0,4194277.0,
+	                    4194191.0, 4194167.0);
+
+	vec4 beta = floor(seedvec / q);
+	vec4 p = a * (seedvec- beta * q) - beta * r;
+	beta = (sign(-p) + vec4(1.0)) * vec4(0.5) * m;
+	seedvec = (p + beta);
+
+	return fract(dot(seedvec / m, 
+	             vec4(1.0, -1.0, 1.0, -1.0)));
+}
+
+// Rays and Spheres
+struct Ray { vec3 origin, direction; };
+struct Sphere { float radius; vec3 center, albedo; 
+                int type; };
+
+///////////////////////////////
+// SCENE DEFINITION and BASIC RAY-TRACER FUNCTIONALITY
+///////////////////////////////
+#define OBJECT 0
+#define ENVIRONMENT 3
+
+// Two spheres
+const int NUM_SPHERES = 1; //ASZ: don't show envmap
+Sphere spheres[NUM_SPHERES];
+void initSpheres() {
+	spheres[0] = Sphere(26.5, vec3(50., 44.75, 128.),
+	                    vec3(.99), OBJECT);
+	//spheres[1] = Sphere(300.5, vec3(50., 44.75, 136.),  //ASZ: don't show envmap
+	//                    vec3(.99), ENVIRONMENT);
+}
+
+float intersect(Sphere s, Ray r) {
+	vec3 op = s.center - r.origin;
+	float t, epsilon = 1e-3, b = dot(op, r.direction), 
+	      det = b * b - dot(op, op) + s.radius * s.radius;
+	if (det < 0.) return 0.; else det = sqrt(det);
+	return (t = b - det) > epsilon ? t :
+	       ((t = b + det) > epsilon ? t : 0.);
+}
+
+int intersect(Ray r, out float t, out Sphere s, int avoid) {
+	int id = -1;
+	t = 1e5;
+	s = spheres[0];
+	for (int i = 0; i < NUM_SPHERES; ++i) {
+		Sphere S = spheres[i];
+		float d = intersect(S, r);
+		if (i!=avoid && d!=0. && d<t) { 
+		    /*we have 2 spheres and can short-circuit*/ 
+		    t = d; id = i; s=S; 
+		    return id;}
+	}
+	return id;
+}
+//////////////////////////////
+
+// decode the simple HDR format in the PNG
+vec3 uberTextureLookup( vec2 uv ) {
+	vec4 color = texture2D( uberTextureSampler, uv );
+	return pow(2.0, color.a - 0.5) * color.xyz;
+}
+
+bool isNan(float val) {
+	return (val <= 0.0 || 0.0 <= val) ? false : true;
+}
+
+bool isInf(float val) {
+	return (val >= 9999.99990 || val <= -9999.99990);
+}
+
+float dotProduct(vec3 dir1, vec3 dir2)
+{
+	float dot = dot(dir1, dir2);
+	return clamp(dot, 1e-5, 1.0);
+}
+
+vec3 lookupInterpolatedG1(int n, float theta)
+{
+	float fb = theta / M_PI_2 * 90.0 ;
+    // find bin centers
+    float f0 = floor(fb-0.5) + 0.5 ;
+    float f1 = f0 + 1.0 ;
+    // find bin indexes t0 and t1
+    float t0 = floor(f0) ;
+    float t1 = floor(f1) ;
+    // ignores the first bin
+    t0 = max(1.0, t0);
+    t1 = max(2.0, t1); 
+    // find theta at bin centers
+    float theta0 = (t0+0.5) * M_PI_2 / 90.0;
+    float theta1 = (t1+0.5) * M_PI_2 / 90.0;
+    //find the weights
+    float w0 = 1.0 - (fb - f0) ;
+    float w1 = 1.0 - w0 ; // 1.0 - (f1 - fb)
+    // sample
+    vec3 G1 = vec3(0.0);
+    vec2 uv;
+    uv.y = float(n)/256.;
+	if (t1 > 90.0-1.0)
+    {
+    	uv.x = (t0+2.+90.)/512.;
+        G1 = uberTextureLookup(uv) * w0 ;
+    }
+    else
+    {
+    	uv.x = (t0+2.+90.)/512.;
+    	vec3 g0 = uberTextureLookup(uv);
+    	uv.x = (t1+2.+90.)/512.;
+    	vec3 g1 = uberTextureLookup(uv);
+        G1 = g0 * w0 + g1 * w1;
+    }
+    return G1;
+}
+
+// material index goes from 0 to 99
+// each texture row contains: rhoD rhoS D[90] G1[90] F[90]
+/*vec3 getBRDF(int n, vec3 dirIn, vec3 dirOut, vec3 dirNormal) {
+
+	vec3 dirH = normalize(dirIn + dirOut);
+	float thetaH = acos(dot(dirH, dirNormal));
+	float thetaD = acos(dot(dirIn, dirH));
+	float thetaI = acos(dot(dirIn, dirNormal));
+	float thetaO = acos(dot(dirOut, dirNormal));
+
+	// BRDF texture has a fixed size of 512x256
+	vec2 uv;
+	uv.y = float(n)/256.;
+
+	uv.x = 0.0/512.;
+	vec3 rhoD = uberTextureLookup(uv);
+
+	uv.x = 1.0/512.;
+	vec3 rhoS = uberTextureLookup(uv);
+
+	int iD = int(clamp(sqrt(thetaH / M_PI_2 
+	             * 90.0 * 90.0), 0.0, 89.0));
+	uv.x = float(iD+2)/512.;
+	vec3 D = uberTextureLookup(uv);
+
+	vec3 G1I = lookupInterpolatedG1(n, thetaI);
+
+	vec3 G1O = lookupInterpolatedG1(n, thetaO);
+
+	int iF = int(clamp(thetaD / M_PI_2 * 90.0, 0.0, 89.0));
+	uv.x = float(iF+2+90+90)/512.;
+	vec3 F = uberTextureLookup(uv);
+
+	vec3 BRDF = (rhoD) + (rhoS) * D * F * 
+	            (G1I / cos(thetaI)) * (G1O / cos(thetaO));
+
+	if(isInf(length(BRDF)) || isNan(length(BRDF)))
+	{
+		return vec3(0.0);
+	}
+
+	return BRDF;
+}*/
+
+float nbrdfTextureLookup(int i, int n) { //i:[0,674], n:[0,100]
+	vec2 uv;
+	uv.x = (0.5 + float(i)) / 1024.0; //675.0;
+	uv.y = (0.5 + float(n)) / 128.0; //100.0;
+	vec4 color = texture2D(uberTextureSampler, uv);
+	return color.x; //pow(color.x, 2.2);
+	//return pow(2.0, color.a - 0.5) * color.x;
+}
+
+vec3 nbrdfTextureLookup3(int i, int n) { //i:[0,674], n:[0,100]
+	vec2 uv;
+	uv.x = float(i) / 1024.0; //675.0;
+	uv.y = float(n) / 128.0; //100.0;
+	vec4 color = texture2D(uberTextureSampler, uv);
+	return vec3(color.x, color.y, color.z);
+}
+
+float fc1(int i, int j, int n) {
+	int idx = 21 * i + j;
+	return nbrdfTextureLookup(idx, n);
+}
+
+float b1(int i, int n) {
+	int idx = 126 + i;
+	return nbrdfTextureLookup(idx, n);
+}
+
+float fc2(int i, int j, int n) {
+	int idx = 147 + 21 * i + j;
+	return nbrdfTextureLookup(idx, n);
+}
+
+float b2(int i, int n) {
+	int idx = 588 + i;
+	return nbrdfTextureLookup(idx, n);
+}
+
+float fc3(int i, int j, int n) {
+	int idx = 609 + 3 * i + j;
+	return nbrdfTextureLookup(idx, n);
+}
+
+float b3(int i, int n) {
+	int idx = 672 + i;
+	return nbrdfTextureLookup(idx, n);
+}
+
+// 6 x 21 x 21 x 3
+// 
+// fc1: [0, 125]
+// b1: [126, 146]
+// fc2: [147, 587]
+// b2: [588, 608]
+// fc3: [609, 671]
+// b3: [672, 674]
+// 
+// 6 x 21 = 126 + 21
+// 21 x 21 = 441 + 21
+// 21 x 3 = 63 + 3
+
+// float atan2(float y, float x) {
+// 	bool s = (abs(x) > abs(y));
+// 	if 
+// 	return mix(1.0, 1.0, s); //return mix(PI/2.0 - atan(x,y), atan(y,x), s);
+// 	return 1.0;
+// }
+
+vec3 xyz2sph(vec3 p) {
+	if (p.z > 0.99999)
+		return vec3(1.0, 0.0, 0.0);
+	if (p.z < -0.99999)
+		return vec3(1.0, M_PI, 0.0);
+	return vec3(1.0, acos(p.z), atan(p.y, p.x));
+}
+
+// vec3 xyz2sph(vec3 v) {
+// 	float r2_xy = v.x*v.x + v.y*v.y;
+// 	float r = sqrt(r2_xy + v.z*v.z);
+// 	float theta = atan(sqrt(r2_xy), v.z);
+// 	float phi = atan(v.y, v.x);
+// 	return vec3(r, theta, phi);
+// }
+
+vec3 sph2xyz(float r, float theta, float phi) {
+	float x = r * sin(theta) * cos(phi);
+	float y = r * sin(theta) * sin(phi);
+	float z = r * cos(theta);
+	return vec3(x, y, z);
+}
+
+vec3 rotate_vector(vec3 x, vec3 axis, float angle) {
+	float cos_angle = cos(angle);
+	float sin_angle = sin(angle);
+	vec3 _out = cos_angle * x;
+	float tmp1 = dot(axis, x);
+	float tmp2 = tmp1 * (1.0 - cos_angle);
+	_out += axis * tmp2;
+	_out += sin_angle * cross(axis, x);
+	return _out;
+}
+
+// get 3D orthonormal frame given one unit vector w
+void getFrame(vec3 w,out vec3 u,out vec3 v) {
+    if (abs(w.x) <= abs(w.y) && abs(w.x) <= abs(w.z)) {
+        u = vec3(0.0,w.z,-w.y);
+    } else if (abs(w.y) <= abs(w.x) && abs(w.y) <= abs(w.z)) 
+    {
+        u = vec3(-w.z,0.0,w.x);
+    } else {
+        u = vec3(w.y,-w.x,0.0);
+    }
+    u = normalize(u);
+    v = cross(w,u);
+}
+
+float normalize_phid(float phi_d) {
+	return phi_d;
+	if (phi_d < 0.0) {
+		return phi_d + 2.0 * M_PI;
+	}
+	if (phi_d >= 2.0 * M_PI) {
+		return phi_d - 2.0 * M_PI;
+	}
+	return phi_d;
+}
+
+vec3 vecW(float nx) {
+	if (abs(nx) > 0.99) {
+		return vec3(0.0, 1.0, 0.0);
+	}
+	return vec3(1.0, 0.0, 0.0);
+}
+
+vec3 getBRDF(int n, vec3 dirIn, vec3 dirOut, vec3 dirNormal) {
+	vec3 wdirIn = dirIn;
+	vec3 wdirOut = dirOut;
+	vec3 wdirNormal = dirNormal;
+// 	vec3 wdirIn = normalize(dirIn);
+// 	vec3 wdirOut = normalize(dirOut);
+// 	vec3 wdirNormal = normalize(dirNormal);
+
+	vec3 dirW = vecW(wdirNormal.x);
+	vec3 dirT = normalize(cross(wdirNormal, dirW));
+	vec3 dirB = normalize(cross(wdirNormal, dirT));
+// 	vec3 dirT;
+// 	vec3 dirB;
+// 	getFrame(wdirNormal, dirT, dirB);
+
+	vec3 _dirIn = vec3(dot(wdirIn, dirT), dot(wdirIn, dirB), dot(wdirIn, wdirNormal));
+	vec3 _dirOut = vec3(dot(wdirOut, dirT), dot(wdirOut, dirB), dot(wdirOut, wdirNormal));
+// 	_dirIn = normalize(_dirIn);
+// 	_dirOut = normalize(_dirOut);
+	float thetaI = acos(dot(dirIn, dirNormal));
+	float thetaO = acos(dot(dirOut, dirNormal));
+	if ((thetaI >= M_PI/2.0 - 0.018) || (thetaO >= M_PI/2.0 - 0.018)) {
+		return vec3(0.0, 0.0, 0.0);
+	}
+
+	vec3 dirH = normalize(_dirIn + _dirOut);
+	//float thetaH = acos(dot(dirH, dirNormal));
+	//float thetaD = acos(dot(dirIn, dirH));
+	//vec3 dirD = vec3(sin(thetaD), 0.0, cos(thetaD));
+
+	vec3 sphH = xyz2sph(dirH);
+	//float theta_h = sphH[1];
+	//float phi_h = sphH[2];
+	//sphH[1] = clamp(sphH[1], 0.0 M_PI/2.0);
+	sphH[1] = min(max(sphH[1], 0.0), M_PI/2.0);
+
+	vec3 y_axis = vec3(0.0, 1.0, 0.0);
+	vec3 z_axis = vec3(0.0, 0.0, 1.0);
+	vec3 tmp = rotate_vector(_dirIn, z_axis, -sphH[2]); //-phi_h
+	vec3 dirD = normalize(rotate_vector(tmp, y_axis, -sphH[1])); //-theta_h
+
+	// normalize phi_d
+	vec3 sphD = xyz2sph(dirD);
+	sphD[2] = normalize_phid(sphD[2]);
+	dirD = normalize(sph2xyz(1.0, sphD[1], sphD[2]));
+
+	// set phi_h = 0.0
+	sphH[2] = 0.0;
+	dirH = normalize(sph2xyz(1.0, sphH[1], sphH[2]));
+
+	float inp[6];
+	inp[0] = dirH.x;
+	inp[1] = dirH.y;
+	inp[2] = dirH.z;
+	inp[3] = dirD.x;
+	inp[4] = dirD.y;
+	inp[5] = dirD.z;
+
+	float a1[21];
+	float a2[21];
+	float a3[3];
+
+	for(int i=0; i<21; i++) {
+		a1[i] = 0.0;
+		a2[i] = 0.0;
+	}
+	for(int i=0; i<3; i++) {
+		a3[i] = 0.0;
+	}
+
+	for(int i=0; i<6; i++) //6
+		for(int j=0; j<21; j++) //21
+			a1[j] += inp[i]*fc1(i, j, n);
+
+	for(int i=0; i<21; i++) //21
+		a1[i] = max(a1[i] + b1(i, n), 0.0);
+
+	for(int i=0;i<21;i++) //21
+		for(int j=0;j<21;j++) //21
+			a2[j] += a1[i]*fc2(i,j,n);
+
+	for(int i=0;i<21;i++) //21
+		a2[i] = max(a2[i]+b2(i,n), 0.0);
+
+	for(int i=0;i<21;i++) //21
+		for(int j=0;j<3;j++) //3
+			a3[j] += a2[i]*fc3(i,j,n);
+
+	for(int i=0;i<3;i++) { //3
+		//a3[i] = max(a3[i] + b3(i,n), 0.0);
+		a3[i] = max(exp(a3[i] + b3(i,n)) - 1.0, 0.0);
+		//a3[i] = pow(a3[i], 1.0/2.2);
+	}
+
+	vec3 BRDF = vec3(a3[0], a3[1], a3[2]) * M_PI;
+	return BRDF;
+
+// 	if(isInf(length(BRDF)) || isNan(length(BRDF))) {
+// 		return vec3(0.0);
+// 	}
+// 
+// 	return BRDF;
+}
+
+// decode the simple HDR format in the PNG
+vec3 lightProbeLookup( vec3 d ) {
+	vec4 temp = textureCube( hdrEnvSampler, d );
+	return pow(2.0, temp.a * 255. - 128. ) * 
+	       intensity_scaler * temp.xyz;
+}
+
+// generate cosine PDF over hemisphere
+float genPDF_cosine(vec3 n,vec3 n1, vec3 n2, out vec3 v)
+{
+    float phi = 2.0*M_PI*rand();
+    float cos_theta = sqrt(rand());
+    float sin_theta = sqrt(1.0 - cos_theta*cos_theta);
+    v = sin_theta*(cos(phi)*n1 + sin(phi)*n2) + cos_theta*n;
+    return cos_theta*INV_PI;
+}
+
+// generate uniform PDF over hemisphere
+float genPDF_uniform(vec3 n,vec3 n1, vec3 n2, out vec3 v)
+{
+    float phi = 2.0*M_PI*rand();
+    float cos_theta = rand();
+    float sin_theta = sqrt(1.0 - cos_theta*cos_theta);
+    v = sin_theta*(cos(phi)*n1 + sin(phi)*n2) 
+        + cos_theta*n;
+    return INV_PI*0.5;
+}
+
+// generate vMF PDF over sphere around given direction
+float genPDF_VMF(float lambda, vec3 n,vec3 n1, 
+                 vec3 n2, out vec3 v)
+{
+    float phi = 2.0*M_PI*rand();
+    float clambda = 1.0 - exp(-2.0*lambda);
+    float cos_theta = log(1.0 - clambda*rand())/lambda + 1.0;
+    float sin_theta = sqrt(1.0 - cos_theta*cos_theta);
+    v = sin_theta*(cos(phi)*n1 + sin(phi)*n2) + cos_theta*n;
+    return INV_PI*0.5*lambda/clambda
+           *exp(lambda*(cos_theta - 1.0));
+}
+
+// same as above, but reject direction if below hemisphere
+float genPDF_VMF_reject(float lambda, vec3 n,vec3 n1, 
+                        vec3 n2, vec3 nhemi, out vec3 v)
+{
+    float pdf;
+    for (int i = 0; i < 10; i++) {
+        pdf = genPDF_VMF(lambda,n,n1,n2,v);
+        if (dot(v,nhemi) > 0.0) break;
+    }
+    return pdf;
+}
+
+// evaluate cosine PDF over hemisphere
+float evalPDF_cosine(vec3 v,vec3 n,vec3 n1, vec3 n2)
+{
+    float cos_theta = dot(v,n); 
+    return (cos_theta < 0.0 ? 0.0 : cos_theta*INV_PI);
+}
+
+// evaluate uniform PDF over hemisphere
+float evalPDF_uniform(vec3 v,vec3 n,vec3 n1, vec3 n2)
+{
+    float cos_theta = dot(v,n);
+    return (cos_theta < 0.0 ? 0.0 : 0.5*INV_PI);
+}
+
+// evaluate vMF PDF
+float evalPDF_VMF(vec3 v,float lambda,vec3 n,
+                  vec3 n1, vec3 n2)
+{
+    float cos_theta = dot(v,n);
+    float clambda = 1.0 - exp(-2.0*lambda);
+    return INV_PI*0.5*lambda/clambda
+           *exp(lambda*(cos_theta - 1.0));
+}
+
+vec3 shade_sample(vec3 dirIn,vec3 dirOut,
+                  vec3 dirNormal,int materialId,float pdf)
+{
+    float cos_In = dot(dirNormal,dirIn);
+    if (cos_In <= 0.0) return vec3(0.0);
+    return INV_PI / pdf * 
+           lightProbeLookup(
+               normalize((view*vec4(dirIn,0.0)).xyz)).xyz
+               * getBRDF(materialId,dirIn,
+                         dirOut,dirNormal)*cos_In;
+}
+
+
+////////////////////////////////////
+// THIS IS WHERE THE SHADING IS COMPUTED
+////////////////////////////////////
+vec3 shade(Ray r) {
+	int id = -1;
+	float t;
+	Sphere obj;
+	id = intersect( r, t, obj, id); // self-intersection
+	// if miss, return black
+	if ( id == -1 ) return vec3(1.0,1.0,1.0); //ASZ: white background
+	vec3 hitpoint = r.origin + t * r.direction;
+	vec3 hitnormal = normalize(hitpoint - obj.center);
+	if( dot( r.direction, hitnormal ) > 0.0 ) { 
+	    hitnormal = -hitnormal;
+	    }  // we hit inside a sphere
+
+	vec3 color = vec3(0.0);
+
+	// compute normal frame
+	vec3 N = hitnormal;
+	vec3 N1, N2;
+	getFrame(N,N1,N2);
+
+	// compute reflection frame
+	vec3 R = 2.0 * dot(-r.direction, hitnormal) 
+				* hitnormal + r.direction;
+	vec3 R1, R2;
+	getFrame(R,R1,R2);
+
+	float lambda = vmf_lambda;
+
+	// total number of MC samples per frame
+	for( int samps = 0; samps < 1000; samps++) {
+		// Hack to get around WebGL loop rules
+		if( float(samps) >= NUM_SAMPS_PER_FRAME ) break; 
+
+		if( obj.type == OBJECT ) {
+			vec3 v;
+			// MIS between uniform + cosine + vMF
+			float pdf;
+			
+			// uniform sample
+			pdf = genPDF_uniform(N, N1, N2, v) 
+				+ evalPDF_cosine(v, N, N1, N2) 
+				+ evalPDF_VMF(v, lambda, R, R1, R2);
+			color += shade_sample(v,-r.direction,
+								hitnormal,
+								materialId,pdf);    
+
+			// cosine sample
+			pdf = genPDF_cosine(N, N1, N2, v) 
+				+ evalPDF_uniform(v, N, N1, N2) 
+				+ evalPDF_VMF(v, lambda, R, R1, R2);
+			color += shade_sample(v,-r.direction,
+								hitnormal,
+								materialId,pdf);  
+
+			// VMF sample
+			pdf = genPDF_VMF(lambda, R, R1, R2, v) 
+				+ evalPDF_uniform(v, N, N1, N2) 
+				+ evalPDF_cosine(v, N, N1, N2);
+			color += shade_sample(v,-r.direction,
+								hitnormal,
+								materialId,pdf);   
+
+		} else if( obj.type == ENVIRONMENT ) {
+			color += lightProbeLookup(
+			            normalize((view * 
+			            vec4(-hitnormal.xyz,0.0)).xyz)).xyz;
+		}
+	}
+	
+	return color/NUM_SAMPS_PER_FRAME;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+void main(void) {
+	// Initialize the scene
+	initSpheres();
+
+	// Setup our Random Number Generator
+	seed = time * ( resolution.y * 
+	                gl_FragCoord.x / resolution.x + 
+	                gl_FragCoord.y / resolution.y);
+	seedvec = vec4(oldrand() * 4194304.0, 
+	               oldrand() * 4194304.0, 
+	               oldrand() * 4194304.0, 
+	               oldrand() * 4194304.0);
+	vec2 uv = 2. * gl_FragCoord.xy / resolution.xy - 1.;
+
+	// Setup camera
+	vec3 camPos = vec3(50.0, 52.0, 265.6); //ASZ: camera position
+	vec3 camd = normalize(vec3(0.0,-0.042612,-1.0));
+	vec3 cx = vec3(resolution.x*0.5135/resolution.y, 0., 0.);
+	vec3 cy = 0.5135 * normalize(cross(cx,camd));
+
+	vec3 d = ((gl_FragCoord.x+rand())/resolution.x - 0.5) *
+	cx  +  camd + ((gl_FragCoord.y-rand())/resolution.y 
+	- 0.5)*cy;
+
+	vec3 color = vec3(0.0);
+
+	// Trace and shade eye ray
+	color += shade(Ray(camPos, normalize(d)));
+
+	gl_FragColor = vec4(color, 1.);
+}
+</script>
+
+
+<script type="text/javascript">
+var effectDiv, sourceDiv, canvas, gl, buffer,
+vertex_shader, fragment_shader, currentProgram,
+vertexPositionLocation, textureLocation, hdr_envmap_cubemap_texture, uber_texture,
+parameters = { start_time: new Date().getTime(), time: 0, screenWidth: 0, screenHeight: 0 };
+
+var g_zoom = 0;
+
+var model      = new Matrix4x4();
+var view = null;
+
+var projection = new Matrix4x4();
+var controller = null;
+var camera_controller = null;
+
+var rttFramebuffer = null;
+var rttTexture = null;
+
+var blit_vs = null;
+var blit_fs = null;
+var blitProgram = null;
+
+function FetchFile(url, cache)
+{
+	var text = $.ajax({
+  		url:   url,
+  		async: false,
+        dataType: "text",
+        mimeType: "text/plain",
+  		cache: cache,
+ 	}).responseText;
+
+ 	return text;
+}
+
+function loadHDRCubeMap(idx) {
+	var ordering = [
+		// Grace face ordering
+		[gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Z, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z],
+		// RNL face ordering
+		[gl.TEXTURE_CUBE_MAP_NEGATIVE_X, gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, gl.TEXTURE_CUBE_MAP_POSITIVE_Z],
+		// Stockhouse face ordering
+		[gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Y, gl.TEXTURE_CUBE_MAP_POSITIVE_Z, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z]
+	];
+	var flipY = [
+		// Grace y-flip settings
+		[false, false, false, false, false, false],
+		// RNL y-flip settings
+		[false, false, false, false, false, false],
+		// Stockhouse y-flip settings
+		[false, false, false, false, false, false]
+	];
+
+	var faces = [[hdr_envmap[idx][0], ordering[idx][0]],
+				[hdr_envmap[idx][1], ordering[idx][1]],
+				[hdr_envmap[idx][2], ordering[idx][2]],
+				[hdr_envmap[idx][3], ordering[idx][3]],
+				[hdr_envmap[idx][4], ordering[idx][4]],
+				[hdr_envmap[idx][5], ordering[idx][5]]];
+    
+	for (var i = 0; i < faces.length; i++) {
+		var face = faces[i][1];
+		var image = faces[i][0];
+		gl.activeTexture(gl.TEXTURE1);
+		gl.bindTexture(gl.TEXTURE_CUBE_MAP, hdr_envmap_cubemap_texture);
+		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, flipY[idx][i]);
+		gl.texImage2D(face, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+			
+		gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+		gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+		gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+		gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    }
+    
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
+}
+
+function loadHDRUberTexture() {
+	gl.activeTexture(gl.TEXTURE2);
+	gl.bindTexture(gl.TEXTURE_2D, uber_texture);
+	gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+	//gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 512, 256, 0, gl.RGB, gl.FLOAT, uberData);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1024, 128, 0, gl.RGB, gl.FLOAT, uberData); //675, 100
+
+	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+	gl.bindTexture(gl.TEXTURE_2D, null);
+
+// 	fb = gl.createFramebuffer();
+// 	gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+// 	gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, uber_texture, 0);
+// 	var canRead = (gl.checkFramebufferStatus(gl.FRAMEBUFFER) == gl.FRAMEBUFFER_COMPLETE);
+// 	console.log(canRead);
+// 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+// 	gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+// 	const pixel = new Float32Array(1024*128*3);
+// 	gl.readPixels(0, 0, 1024, 128, gl.RGB, gl.FLOAT, pixel);
+// 	//const pixel = new Float32Array(100*675*3);
+// 	//gl.readPixels(0, 0, 675, 100, gl.RGB, gl.FLOAT, pixel);
+// 	console.log(pixel);
+// 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+}
+
+function init() {
+	vertex_shader   = document.getElementById("ubertexture-vs").text;
+	fragment_shader = document.getElementById("ubertexture-fs").text;
+
+	g_vshader = vertex_shader;
+	$("#editor").text(fragment_shader);
+
+	canvas = document.createElement("canvas");
+	canvas.style.cssText = "border: 0px solid #404040; border-radius: 6px"; //ASZ: remove border
+
+	effectDiv = document.getElementById("effect");
+	effectDiv.appendChild(canvas);
+
+	// Initialise WebGL
+	try {
+		//gl = canvas.getContext("webgl2");
+		gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+	} catch(error) { }
+
+	//var ext = gl.getExtension('EXT_color_buffer_float');
+	//var someVAO = gl.createVertexArray();
+	
+	if (!gl) {
+		alert("WebGL not supported");
+		throw "cannot create webgl context";
+	}
+
+	//Check for float-RT support
+	if (!gl.getExtension("OES_texture_float")) {
+		alert("OES_texture_float not supported");
+		throw "missing webgl extension";
+	}
+
+	// Add enum strings to context
+	if (gl.enum_strings === undefined) {
+		gl.enum_strings = { };
+		for (var propertyName in gl) {
+		  if (typeof gl[propertyName] == "number") {
+			gl.enum_strings[gl[propertyName]] = propertyName;
+		  }
+		}
+	}
+
+	/// create HDR cubemap texture object and load data
+	hdr_envmap_cubemap_texture = gl.createTexture();
+	loadHDRCubeMap(em_idx);
+	
+	// create HDR uberTexture
+	uber_texture = gl.createTexture();
+	loadHDRUberTexture();
+		
+	// Create Vertex buffer (2 triangles)
+	buffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0]), gl.STATIC_DRAW);
+
+	// Create Program
+	currentProgram = createProgram(vertex_shader, fragment_shader);
+	gl.useProgram(currentProgram);
+	///gl.uniform1f(gl.getUniformLocation(currentProgram,"vmf_lambda"), vMFLambdas[event.target.selectedIndex]);
+	gl.uniform1f(gl.getUniformLocation(currentProgram,"vmf_lambda"), vMFLambdas[vmf_idx]);
+
+	rttFramebuffer = gl.createFramebuffer();
+	gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);
+	rttFramebuffer.width  = 384; // FIXME
+	rttFramebuffer.height = 384;
+
+	rttTexture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D, rttTexture);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, rttFramebuffer.width, rttFramebuffer.height, 0, gl.RGBA, gl.FLOAT, null);
+	//gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, rttFramebuffer.width, rttFramebuffer.height, 0, gl.RGBA, gl.FLOAT, null);
+
+	gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, rttTexture, 0);
+	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+	gl.bindTexture(gl.TEXTURE_2D, null);
+
+	blit_vs = document.getElementById("mis_blit-vs").text;
+	blit_fs = document.getElementById("mis_blit-fs").text;
+
+	var header = "#ifdef GL_ES\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#line 0\n";
+	blit_fs = header + blit_fs;
+
+	blitProgram = gl.createProgram();
+
+	var vs = createShader(blit_vs, gl.VERTEX_SHADER);
+	var fs = createShader(blit_fs, gl.FRAGMENT_SHADER);
+
+	gl.attachShader(blitProgram, vs);
+	gl.attachShader(blitProgram, fs);
+
+	gl.deleteShader(vs);
+	gl.deleteShader(fs);
+
+	gl.linkProgram(blitProgram);
+
+	onWindowResize();
+	window.addEventListener("resize", onWindowResize, false);
+
+	$("canvas").mousewheel(function(event, delta) {
+		g_zoom += delta*10.0;
+		g_sample_count = 0;
+		return false;
+	});
+
+	// Fetch media and kick off the main program once everything has loaded
+	$(function() {
+		$(document).ajaxStop(function() {
+			$(this).unbind("ajaxStop");
+			main_prog();
+		});
+
+		// Load data here
+
+		main_prog();
+	});
+}
+
+
+function onWindowResize(event) {
+	$("#peekaboo").css("height", window.innerHeight);
+	$("#stuff").css("height", window.innerHeight);
+
+	canvas.width  = 384;
+	canvas.height = 384;
+
+	parameters.screenWidth = canvas.width;
+	parameters.screenHeight = canvas.height;
+
+	gl.viewport(0, 0, canvas.width, canvas.height);
+}
+
+
+function glUniformTypeToString(type) {
+	switch (type) {
+		case gl.FLOAT:        return "FLOAT";
+		case gl.FLOAT_VEC2:   return "FLOAT_VEC2";
+		case gl.FLOAT_VEC3:   return "FLOAT_VEC3";
+		case gl.FLOAT_VEC4:   return "FLOAT_VEC4";
+		case gl.INT:          return "INT";
+		case gl.INT_VEC2:     return "INT_VEC2";
+		case gl.INT_VEC3:     return "INT_VEC3";
+		case gl.INT_VEC4:     return "INT_VEC4";
+		case gl.BOOL:         return "BOOL";
+		case gl.BOOL_VEC2:    return "BOOL_VEC2";
+		case gl.BOOL_VEC3:    return "BOOL_VEC3";
+		case gl.BOOL_VEC4:    return "BOOL_VEC4";
+		case gl.FLOAT_MAT2:   return "FLOAT_MAT2";
+		case gl.FLOAT_MAT3:   return "FLOAT_MAT3";
+		case gl.FLOAT_MAT4:   return "FLOAT_MAT4";
+		case gl.SAMPLER_2D:   return "SAMPLER_2D";
+		case gl.SAMPLER_CUBE: return "SAMPLER_CUBE";
+	}
+	return "unknown";
+}
+
+
+function createProgram(vertex, fragment) {
+	var header = "#ifdef GL_ES\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n#line 0\n";
+	fragment = header + fragment;
+
+	var program = gl.createProgram();
+
+	var vs = createShader(vertex, gl.VERTEX_SHADER);
+	var fs = createShader(fragment, gl.FRAGMENT_SHADER);
+
+	if (vs == null || fs == null)
+		return null;
+
+	gl.attachShader(program, vs);
+	gl.attachShader(program, fs);
+
+	gl.deleteShader(vs);
+	gl.deleteShader(fs);
+
+	gl.linkProgram(program);
+
+
+	if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+		return null;
+	}
+
+
+	var control_names = new Array();
+	var controls = {};
+
+	var lines = fragment.split("\n");
+
+	var bindings = { }
+
+	// Adds double quotes around labels
+	function preprocessJSON(str) {
+		return str.replace(/("(\\.|[^"])*"|'(\\.|[^'])*')|(\w+)\s*:/g,
+		function(all, string, strDouble, strSingle, jsonLabel) {
+			if (jsonLabel) {
+				return '"' + jsonLabel + '": ';
+			}
+			return all;
+		});
+	}
+
+	for (var x in lines) {
+		var line = lines[x];
+		var re = /^\/\/ bind\s+(.*?)\s(.*)/;
+		var m = re.exec(line);
+		if (m) {
+			try {
+				var obj = $.parseJSON(preprocessJSON(m[2]));
+				bindings[m[1]] = obj;
+				control_names.push(m[1]);
+			}
+			catch (e) {
+				console.log("Failed to parse shader binding: " + m[1]);
+			}
+		}
+	}
+
+	function CopyProperties(src, dest) {
+		for (x in src) {
+			if (dest.hasOwnProperty(x) && typeof(dest[x]) === typeof(src[x]))
+				dest[x] = src[x];
+		}
+	}
+
+	// Destroy existing children
+	var container = $("#params");
+
+	var children = container.children();
+	children.each(function() {
+		var v = $(this);
+		v.detach();
+	})
+	container.empty();
+
+	g_param_types = {};
+
+	var nb_uniforms = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+	for (var i = 0; i < nb_uniforms; i++) {
+		var uni = gl.getActiveUniform(program, i);
+
+		var label = uni.name;
+		var bind = bindings[uni.name];
+		if (bind && typeof(bind.label) === "string")
+			label = bind.label;
+
+		var old_value  = g_params[uni.name];
+		var is_default = !g_param_edited[uni.name];
+		var new_value  = undefined;
+
+		var control = undefined;
+
+		// DN: hack to make sure we don't get UI elements for these two uniforms
+		if (uni.name === "time" ) continue;
+		if (uni.name === "vmf_lambda" ) {
+			continue;
+		} 
+		
+		if (uni.type === gl.FLOAT) {
+			var state = {
+				default : 1.0,
+				min  : 0.0,
+				max  : 1.0,
+				step : 0.01,
+			};
+
+			CopyProperties(bind, state);
+
+			var is_default = !g_param_edited[uni.name];
+
+			new_value = is_default ? state.default : old_value;
+			control = bindSlider(uni.name, label, state.default, new_value, state);
+		}
+		else if (uni.type === gl.FLOAT_VEC3) {
+			var def_col = new Color(1, 1, 1)
+
+			CopyProperties(bind, def_col);
+
+			new_value = is_default ? def_col : old_value;
+			control = bindPicker(uni.name, label, def_col, new_value);
+		}
+		else if (uni.type === gl.BOOL) {
+			var def_val = true;
+
+			if (bind && typeof(bind.default) === "boolean")
+				def_val = bind.default;
+
+			g_param_default[uni.name] = def_val;
+
+			new_value = is_default ? def_val : old_value;
+			control = bindCheckbox(uni.name, label, new_value);
+		}
+		else if (uni.type === gl.INT) {
+			var def_val = 0;
+
+			g_param_default[uni.name] = def_val;
+
+			new_value = is_default ? def_val : old_value;
+			//console.log("uni.name: " + uni.name + ", new_value: " + new_value);
+			control = bindSelect(uni.name, label, new_value);			
+		}
+		else if (uni.type === gl.SAMPLER_CUBE) {
+			var def_val = 0;
+
+			g_param_default[uni.name] = def_val;
+
+			new_value = is_default ? def_val : old_value;
+			//console.log("uni.name: " + uni.name + ", new_value: " + new_value);
+			control = bindSelect(uni.name, label, new_value);			
+		}
+		else {
+			continue;
+		}
+
+		g_param_types[uni.name] = uni.type;
+		g_params[uni.name] = new_value;
+
+		if (bind === undefined)
+			control_names.push(uni.name);
+		controls[uni.name] = control;
+	}
+
+
+
+	// Finally add the controls to the page
+	for (x in control_names) {
+		var control = controls[control_names[x]];
+
+		// Skip any binds that don't reference active uniforms
+		if (control === undefined)
+			continue;
+
+		// Pad for next element
+		control.css("margin", "0 0 12px 12px");
+
+		container.append(control);
+	}
+
+	setupMaterialSelect();
+
+	setupEnvmapSelect();
+
+	return program;
+}
+
+
+var gl_shader_error = null;
+
+function createShader(src, type) {
+	var shader = gl.createShader(type);
+
+	gl.shaderSource(shader, src);
+	gl.compileShader(shader);
+
+	gl_shader_error = null;
+
+	if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+		gl_shader_error = gl.getShaderInfoLog(shader);
+		return null;
+	}
+
+	return shader;
+}
+
+
+function animate() {
+	requestAnimationFrame(animate);
+	draw();
+}
+
+function main_prog() {
+	controller = new CameraController(canvas);
+	// Try the following (and uncomment the "pointer-events: none;" in
+	// the index.html) to try the more precise hit detection
+	//  controller = new CameraController(document.getElementById("body"), c, gl);
+	controller.onchange = function(xRot, yRot) {
+	};
+
+	camera_controller = new SimpleRotator(canvas,function(){ 
+		g_sample_count = 0;
+
+		// restart the rendering and accumulation
+		parameters.start_time = new Date().getTime() - 0.01;
+		gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);
+		gl.clearColor(0, 0, 0, 0);
+	    gl.clear(gl.COLOR_BUFFER_BIT);
+
+	    draw();
+	});
+
+	requestAnimationFrame(animate);
+	draw();
+}
+
+
+function checkGLError() {
+	var error = gl.getError();
+	if (error != gl.NO_ERROR) {
+		var str = "GL Error: " + error + " " + gl.enum_strings[error];
+		console.log(str);
+		throw str;
+	}
+}
+
+
+function draw() {
+	parameters.time = new Date().getTime() - parameters.start_time;
+
+	gl.enable(gl.DEPTH_TEST);
+	gl.clearColor(0.0, 0.0, 0.0, 0.0);
+
+	// Note: the viewport is automatically set up to cover the entire Canvas.
+	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+	checkGLError();
+
+	// Load program into GPU
+	gl.useProgram(currentProgram);
+
+	checkGLError();
+
+    view = camera_controller.getViewMatrix();
+
+	// Get var locations
+	vertexPositionLocation = gl.getAttribLocation(currentProgram, "position");
+
+	function location(u) {
+		return gl.getUniformLocation(currentProgram, u);
+	}
+
+	// Set values to program variables
+	for (var x in g_params) {
+		var type  = g_param_types[x];
+		var value = g_params[x];
+		var loc   = location(x);
+
+		if (type === gl.FLOAT)      gl.uniform1f(loc, value);
+		if (type === gl.FLOAT_VEC3) gl.uniform3f(loc, value.r, value.g, value.b);
+		if (type === gl.BOOL)       gl.uniform1i(loc, value);
+		if (type === gl.INT)       	gl.uniform1i(loc, value);
+	}
+
+	//gl.uniformMatrix4fv(location("view"), gl.FALSE, new Float32Array(view.elements));
+	gl.uniformMatrix4fv(location("view"), gl.FALSE, view );
+
+	gl.uniform2f(location("resolution"), parameters.screenWidth, parameters.screenHeight);
+	gl.uniform1f(location("time"), parameters.time/1000);
+
+	// DN: update the vMF lambda according to the selected material
+	gl.useProgram(currentProgram);
+	gl.uniform1f(location("vmf_lambda"), vMFLambdas[vmf_idx]);
+
+	gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);
+
+	gl.enable(gl.BLEND);
+	gl.blendFunc(gl.ONE, gl.ONE);
+	
+	gl.activeTexture(gl.TEXTURE1);
+	gl.bindTexture(gl.TEXTURE_CUBE_MAP, hdr_envmap_cubemap_texture);
+	gl.uniform1i(gl.getUniformLocation(currentProgram, "hdrEnvSampler"), 1);
+
+	gl.activeTexture(gl.TEXTURE2);
+	gl.bindTexture(gl.TEXTURE_2D, uber_texture);
+	gl.uniform1i(gl.getUniformLocation(currentProgram, "uberTextureSampler"), 2);
+
+	// Render geometry
+	gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+	gl.vertexAttribPointer(vertexPositionLocation, 2, gl.FLOAT, false, 0, 0);
+	gl.enableVertexAttribArray(vertexPositionLocation);
+	gl.drawArrays(gl.TRIANGLES, 0, 6);
+	gl.disableVertexAttribArray(vertexPositionLocation);
+
+	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+	gl.useProgram(blitProgram);
+
+	gl.disable(gl.BLEND);
+
+	// Set texture
+	gl.activeTexture(gl.TEXTURE0);
+	gl.bindTexture(gl.TEXTURE_2D, rttTexture);
+	gl.uniform1i(gl.getUniformLocation(blitProgram, "tex"), 0);
+
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S,     gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T,     gl.CLAMP_TO_EDGE);
+
+	gl.uniform2f(gl.getUniformLocation(blitProgram, "resolution"), parameters.screenWidth, parameters.screenHeight);
+
+	// Blit pass
+	gl.enableVertexAttribArray(vertexPositionLocation);
+	gl.drawArrays(gl.TRIANGLES, 0, 6);
+	gl.disableVertexAttribArray(vertexPositionLocation);
+
+	gl.bindTexture(gl.TEXTURE_2D, null);
+}
+</script>
+
+
+<script>
+$(document).keyup(function(e) {
+     if (e.keyCode == 27) { // escape key maps to keycode `27`
+  		$("#peekaboo").toggle();
+    }
+});
+
+// disable selection, drag & drop in graphics window
+$("#effect").mousedown(function (event) {
+    event.preventDefault();
+});
+
+
+window.onload = function() {
+	init();
+
+	$("#peekaboo").resizable({ minWidth: 0 });
+
+	var editor = ace.edit("editor");
+	editor.setTheme("ace/theme/clouds_midnight");
+
+	var Mode = require("ace/mode/glsl").Mode;
+	editor.getSession().setMode(new Mode());
+	editor.getSession().setUseWrapMode(true);
+	editor.getSession().setOption("firstLineNumber", 0);
+	editor.setShowPrintMargin(false);
+
+	editor.renderer.setHScrollBarAlwaysVisible(false);
+	editor.renderer.setVScrollBarAlwaysVisible(false);
+
+	var markers = [];
+
+	var nb_sliders = 0;
+
+	var timeout = null;
+
+	$("#peekaboo").bind("resize", function(event, ui) {
+		editor.resize();
+	});
+
+	$("#peekaboo").css("height", window.innerHeight);
+
+    $("#stuff").show();
+
+	var rebuild = function() {
+		var vertex_shader, fragment_shader;
+		var new_prog;
+		var text = editor.getSession().getValue();
+
+		vertex_shader   = g_vshader;
+		fragment_shader = text;
+
+		editor.getSession().clearAnnotations();
+		for (m in markers) {
+			editor.getSession().removeMarker(markers[m]);
+		}
+		markers = [];
+
+		new_prog = createProgram(vertex_shader, fragment_shader);
+
+		var status_color = new_prog ? "#404040" : "#7f0000"
+		$("#status").css("border-color", status_color);
+
+		marked_lines = [];
+
+		var text = "Compiled successfully!";
+
+		if (new_prog !== null) {
+			currentProgram = new_prog;
+		}
+		else if (gl_shader_error !== null) {
+			gl_shader_error = gl_shader_error.replace(/\0/g, "");
+			text = gl_shader_error.replace(/\n/g, "<br>");
+
+			var annos = [];
+
+			var re = /\d+:(\d+):(.*)\n/g;
+			var match;
+			while (match = re.exec(gl_shader_error)) {
+				var line = parseInt(match[1]);
+				var error = match[2];
+
+				if (marked_lines[line]) {
+					error = " **** " + error;
+				}
+
+				annos.push({
+				  row: line,
+				  column: 0,
+				  text: error,
+				  type: "error"
+				});
+
+				if (marked_lines[line] === undefined) {
+					marked_lines[line] = true;
+
+					var Range = require("ace/range").Range;
+					var line_range = new Range(line, 0, line + 1, 0);
+
+					var marker = editor.getSession().addMarker(line_range, "ace_error", "line", false);
+					markers.push(marker);
+				}
+			}
+
+			editor.getSession().setAnnotations(annos);
+		}
+
+		$("#status_text").html("<b>Press ESC to toggle code editor</b></br>" + text);
+
+		// restart the rendering and accumulation
+		parameters.start_time = new Date().getTime() - 0.01;
+		gl.bindFramebuffer(gl.FRAMEBUFFER, rttFramebuffer);
+		gl.clearColor(0, 0, 0, 0);
+	    gl.clear(gl.COLOR_BUFFER_BIT);
+
+		g_sample_count = 0;
+	}
+
+	$("#editor").keyup(function() {
+		clearTimeout(timeout);
+		timeout = setTimeout(rebuild, 1000);
+	});
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Neural BRDF Representation and Importance Sampling</title>
+<link rel="stylesheet" type="text/css" href="fontello/css/fontello-embedded.css">
+<link rel="stylesheet" type="text/css" href="typora.css">
+</head>
+
+<body class='typora-export'>
+	<div id='write'  class=''>
+		<h1>
+			<div style="text-align: center;"><span>Neural BRDF Representation and<br>Importance Sampling</span></div>
+		</h1>
+		<ul>
+			<li><b style="font-size: 1.2em"><a href="http://www0.cs.ucl.ac.uk/staff/A.Sztrajman/webpage/index.html">Alejandro Sztrajman</a></b></li>
+			<li><b style="font-size: 1.2em"><a href="http://www0.cs.ucl.ac.uk/staff/G.Rainer/">Gilles Rainer</a></b></li>
+			<li><b style="font-size: 1.2em"><a href="http://www.homepages.ucl.ac.uk/~ucactri/">Tobias Ritschel</a></b></li>
+			<li><b style="font-size: 1.2em"><a href="https://reality.cs.ucl.ac.uk/weyrich.html">Tim Weyrich</a></b></li>
+		</ul>
+		<ul>
+			Department of Computer Science, University College London, UK.<br>
+			<center><i>Computer Graphics Forum</i>, 2021 (EGSR 2022).</center>
+			<p>&nbsp;</p>
+		</ul>
+		<center>
+			<figure>
+				<img src="images/teaser3.jpg" style="width:100%;">
+<!-- 				&emsp;<img src="imgs/setup4_3.jpg" style="height:270px;"> -->
+				<br>
+			</figure>
+		</center>
+		<p><span>Controlled capture of real-world material appearance yields tabulated sets of highly realistic reflectance data. In practice, however, its high memory footprint requires compressing into a representation that can be used efficiently in rendering while remaining faithful to the original. Previous works in appearance encoding often prioritised one of these requirements at the expense of the other, by either applying high-fidelity array compression strategies not suited for efficient queries during rendering, or by fitting a compact analytic model that lacks expressiveness. We present a compact neural network-based representation of BRDF data that combines high-accuracy reconstruction with efficient practical rendering via built-in interpolation of reflectance. We encode BRDFs as lightweight networks, and propose a training scheme with adaptive angular sampling, critical for the accurate reconstruction of specular highlights. Additionally, we propose a novel approach to make our representation amenable to importance sampling: rather than inverting the trained networks, we learn an embedding that can be mapped to parameters of an analytic BRDF for which importance sampling is known. We evaluate encoding results on isotropic and anisotropic BRDFs from multiple real-world datasets, and importance sampling performance for isotropic BRDFs mapped to two different analytic models.</span></p>
+		<p>&nbsp;</p>
+		<ul>
+			<li><i class="icon-book-open-1"></i><a href="https://arxiv.org/pdf/2102.05963.pdf">Paper</a><br><font style='font-size:14px;'>PDF 48 MB</font></li>
+			<li><i class="icon-book-open-1"></i><a href="./sztrajman-etal_cgf21_lowres.pdf">Paper (lowres)</a><br><font style='font-size:14px;'>PDF 12 MB</font></li>
+			<!--<li style="vertical-align:top;"><i class="icon-github-circled"></i>Code<br>Coming Soon<font style='font-size:14px;'></font></li>-->
+			<li><i class="icon-book-open-1"></i><a href="./supplemental/pdfs/supplemental_merl.pdf">Supplemental MERL</a><br><font style='font-size:14px;'>PDF 55 MB</font></li>
+			<li><i class="icon-book-open-1"></i><a href="./sztrajman2021neural-slides.pdf">Presentation Slides</a><br><font style='font-size:14px;'>PDF 5.9 MB</font></li>
+<!--			<li><i class="icon-book-open-1"></i><a href="./supplemental/pdfs/supplemental_rgl-isotropic.pdf">Supplemental RGL</a><br><font style='font-size:14px;'>PDF 4.8 MB</font></li>-->
+		</ul>
+		<p>&nbsp;</p>
+		<!-- ###################################################################### -->
+		<hr />
+		<h2 id="webgl">
+			<a name="webgl" class="md-header-anchor"></a><span>WebGL Demo</span>
+		</h2>
+		The WebGL widget uses our neural encodings (NBRDF) to render a scene with measured materials from MERL. Pre-trained network weights are read from a texture file, and inference is implemented using GLSL.
+			<div style="text-align:center; width:100%;">
+				<iframe align="center" src="webgl.html" scrolling="no" height="384px"></iframe> <!-- style="border: 1px solid gray; border-radius: 25px;" -->
+			</div>
+			<!--<p style="font-size:9pt;">Based on a code by <a href="http://www.iro.umontreal.ca/~derek/files/NonParamBRDF/NonParamBRDFDemo.html">[Bagher et al. 2016]</a>.</p>-->
+		<p>&nbsp;</p>
+		<!-- ###################################################################### -->
+		<hr />
+		<h2>
+			<a name="datasets" class="md-header-anchor"></a><span>Code and Pre-trained Models</span>
+		</h2>
+		<p><span>We provide pre-trained NBRDFs for measured materials from multiple databases.</span></p>
+<!-- 		<p>&nbsp;</p> -->
+		<ol>
+			<li><i class="icon-floppy-1"></i><a href="./supplemental/nbrdf_code.zip">code.zip</a><font style="font-size:14px;"> (3.0 MB) Python code to train NBRDF networks, and Mitsuba plugin to render using pre-trained NBRDFs.</font></li>
+		</ol>
+		<ol>
+			<li><i class="icon-floppy-1"></i><a href="./supplemental/data/merl_nbrdf.zip">merl_nbrdf.zip</a><font style='font-size:14px;'> (0.45 MB) All materials from the <a href="https://www.merl.com/brdf/">MERL database</a>.</font></li>
+		</ol>
+		<ol>
+			<li><i class="icon-floppy-1"></i><a href="./supplemental/data/rgl-isotropic_nbrdf.zip">rgl-isotropic_nbrdf.zip</a><font style='font-size:14px;'> (0.23 MB) Isotropic materials from the <a href="http://rgl.epfl.ch/materials">RGL database</a>.</font></li>
+		</ol>
+		<ol>
+			<li><i class="icon-floppy-1"></i><a href="./supplemental/data/nielsen_nbrdf.zip">nielsen_nbrdf.zip</a><font style='font-size:14px;'> (0.04 MB) Materials from <a href="https://brdf.compute.dtu.dk/">Nielsen et al. (2015)</a>.</font></li>
+		</ol>
+		<ol>
+			<li><i class="icon-floppy-1"></i><a href="./supplemental/pytorch_code.zip">pytorch_code.zip</a><font style='font-size:14px;'> (6 KB) NBRDF training script (alternative implementation in PyTorch by <a href="https://scholar.google.com/citations?user=CEeuDLcAAAAJ">Michael Fischer</a>).
+		</ol>
+
+<!--		<ol>
+			<li><i class="icon-book-open"></i><a href="./supplemental/pdfs/supplemental_merl.pdf">supplemental_merl.pdf</a><font style='font-size:14px;'> (55 MB)</font></li>
+		</ol>
+		<ol>
+			<i class="icon-book-open"></i><a href="./supplemental/pdfs/supplemental_rgl-isotropic.pdf">supplemental_rgl-isotropic.pdf</a><font style='font-size:14px;'> (4.8 MB)</font>
+		</ol>-->
+		<p>&nbsp;</p>
+		<!-- ###################################################################### -->
+		<hr />
+		<h2>
+			<a name="paper" class="md-header-anchor"></a><span>Paper</span>
+		</h2>
+		<p><kbd style="display:inline-block"><a href="./sztrajman-etal_cgf21_lowres.pdf"><img src="images/paper-montage.jpg"></a></kbd></p>
+		<p>&nbsp;</p>
+		<!-- ###################################################################### -->
+<!--		<hr />
+		<h2>
+			<a name="slides" class="md-header-anchor"></a><span>Presentation Slides</span>
+		</h2>
+
+		<script type="text/javascript" src="https://raw.github.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
+		<script type="text/javascript">
+		function renderPDF(url, canvasContainer, options) {
+			var options = options || { scale: 1 };
+			function renderPage(page) {
+				var viewport = page.getViewport(options.scale);
+				var canvas = document.createElement('canvas');
+				var ctx = canvas.getContext('2d');
+				var renderContext = {
+				canvasContext: ctx,
+				viewport: viewport
+				};
+				canvas.height = viewport.height;
+				canvas.width = viewport.width;
+				canvasContainer.appendChild(canvas);
+				page.render(renderContext);
+			}
+			function renderPages(pdfDoc) {
+				for(var num = 1; num <= pdfDoc.numPages; num++)
+					pdfDoc.getPage(num).then(renderPage);
+			}
+			PDFJS.disableWorker = true;
+			PDFJS.getDocument(url).then(renderPages);
+		}
+		</script>
+		<div id="holder"></div>
+		<script type="text/javascript">
+		renderPDF('sztrajman2021neural-slides.pdf', document.getElementById('holder'));
+		</script>
+		<p>&nbsp;</p>-->
+		<!-- ###################################################################### -->
+		<hr />
+		<h2>
+			<a name="bibtex" class="md-header-anchor"></a><span>BibTeX</span>
+		</h2>
+		<pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="latex"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="latex"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 8px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">@article<span class="cm-bracket">{</span>sztrajman2021nbrdf,</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>author=<span class="cm-bracket">{</span>Alejandro Sztrajman and Gilles Rainer and Tobias Ritschel and Tim Weyrich<span class="cm-bracket">}</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  title = <span class="cm-bracket">{</span>Neural BRDF Representation and Importance Sampling<span class="cm-bracket">}</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  journal = <span class="cm-bracket">{</span>Computer Graphics Forum<span class="cm-bracket">}</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  year = <span class="cm-bracket">{</span><span class="cm-atom">2021</span><span class="cm-bracket">}</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  doi = <span class="cm-bracket">{</span>https://doi.org/10.1111/cgf.14335<span class="cm-bracket">}</span>,</span></pre><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  url = <span class="cm-bracket">{</span>https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.14335<span class="cm-bracket">}</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-bracket">}</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 162px;"></div><div class="CodeMirror-gutters" style="display: none; height: 162px;"></div></div></div></pre><p>&nbsp;</p>
+		<!-- ###################################################################### -->
+		<hr />
+		<h2>
+			<a name="acknowledgement" class="md-header-anchor"></a><span>Acknowledgement</span>
+		</h2>
+		<p><span>This project has received funding from the European Union’s Horizon 2020 research and innovation program under the Marie Skłodowska-Curie grant agreement No 642841. The webpage template was inspired by <a href="https://elifons.github.io/assets/papers/icassp2021.html">this project</a>. The WebGL application is based on an implementation by <a href="http://cim.mcgill.ca/~derek/files/NonParamBRDF/NonParamBRDFDemo.html">[Bagher et al. 2016]</a>.
+		</span></p>
+	</div>
+</body>
+</html>
+

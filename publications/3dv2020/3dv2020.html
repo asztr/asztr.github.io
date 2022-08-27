@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>High-Dynamic-Range Lighting Estimation from Face Portraits</title>
+<link rel="stylesheet" type="text/css" href="fontello/css/fontello-embedded.css">
+<link rel="stylesheet" type="text/css" href="typora.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<style>
+	h1 {
+		text-align: center;
+	}
+
+	h2 {
+		text-align: left;
+		border-top: solid 1px #9a9a9a;
+		margin-top: 50px;
+		margin-bottom: 20px;
+		padding-top: 25px;
+	}
+	/* ----------------- */
+	div.authors {
+		font-size: 1.2em;
+		font-weight: bold;
+		text-align: center;
+		line-height: 2em;
+		/*margin-bottom:15px;*/
+		margin-top: 15px;
+	}
+	
+	div.authors span {
+		padding-left: 15px;
+		padding-right: 15px;
+		white-space: nowrap;
+	}
+	
+	div.authors sup {
+		font-size: 10px;
+		font-weight: normal;
+	}
+	/* ----------------- */
+	div.institutions {
+		text-align: center;
+		margin-top: 20px;
+	}
+	
+	div.institutions span {
+		padding-left: 15px;
+		padding-right: 15px;
+		white-space: nowrap;
+	}
+	
+	div.institutions sup {
+		font-size: 10px;
+	}
+	/* ----------------- */
+	div.venue {
+		text-align: center;
+		font-style: italic;
+		margin-top: 20px;
+	}
+	
+	figure.teaser {
+		margin-top: 20px;
+		text-align: center;
+	}
+	
+	div.abstract {
+		margin-top: 20px;
+		text-align: justify;
+	}
+	/* ----------------- */
+	div.main-links {
+		display: block;
+		text-align: center;
+		line-height: 2em;
+		margin-top: 45px;
+		width: 100%;
+		white-space: nowrap;
+	}
+	
+	div.main-links div {
+		display: inline-block;
+		padding-left: 35px;
+		padding-right: 35px;
+		line-height: 1.5em;
+	}
+	
+	div.main-links div span.description {
+		font-size: 14px;
+	}
+	/* ----------------- */
+	div.bibtex {
+		background-color:#f6f9fc;
+		font-family:'monospace';
+		font-size:14px;
+		padding:15px;
+		border:solid 1px #cacaca;
+		border-radius:2px;
+	}
+</style>
+
+<body class='typora-export'>
+	<div id='write'  class=''>
+		<h1>High-Dynamic-Range Lighting Estimation from<br>Face Portraits</h1>
+		<div class="authors">
+			<span><a href="http://www0.cs.ucl.ac.uk/staff/A.Sztrajman/webpage/index.html">Alejandro Sztrajman</a><sup>1</sup></span>
+			<span><a href="https://www.microsoft.com/applied-sciences/people/alexandros-neophytou">Alexandros Neophytou</a><sup>2</sup></span>
+			<span><a href="https://reality.cs.ucl.ac.uk/weyrich.html">Tim Weyrich</a><sup>1</sup></span>
+			<span><a href="https://www.microsoft.com/applied-sciences/people/eric-sommerlade">Eric Sommerlade</a><sup>2</sup></span>
+		</div>
+		<div class="institutions">
+			<span><sup>1</sup>University College London, UK.</span>
+			<span><sup>2</sup>Microsoft, Reading, UK.</span><br>
+		</div>
+		<div class="venue">
+			International Conference on 3D Vision 2020
+		</div>
+
+		<!--<figure class="teaser">
+			<img src="img/full_diagram_v2.svg" style="width:60%;">
+		</figure>-->
+
+		<div class="abstract">
+			We present a CNN-based method for outdoor high-dynamic-range (HDR) environment map prediction from low-dynamic-range (LDR) portrait images. Our method relies on two different CNN architectures, one for light encoding and another for face-to-light prediction. Outdoor lighting is characterised by an extremely high dynamic range, and thus our encoding splits the environment map data between low and high-intensity components, and encodes them using tailored representations. The combination of both network architectures constitutes an end-to-end method for accurate HDR light prediction from faces at real-time rates, inaccessible for previous methods which focused on low dynamic range lighting or relied on non-linear optimisation schemes. We train our networks using both real and synthetic images, we compare our light encoding with other methods for light representation, and we analyse our results for light prediction on real images. We show that our predicted HDR environment maps can be used as accurate illumination sources for scene renderings, with potential applications in 3D object insertion for augmented reality.
+		</div>
+		
+		<div class="main-links">
+			<div>
+				<i class="icon-book-open-1"></i>
+				<a href="./3dv-paper.pdf">Paper</a><br>
+				<span class="description">PDF 5.6 MB</span>
+			</div>
+			<div>
+				<i class="fas fa-file-archive"></i>
+				<a href="./additional_material.zip">Additional Material</a><br>
+				<span class="description">PDF 68 MB</span>
+			</div>
+		</div>
+		<!-- ###################################################################### -->
+		<h2>Short Presentation</h2>
+		<video width="80%" controls preload="metadata">
+			<source src="./3dv-short+subs.mp4" type="video/mp4">
+		</video>
+		<!-- ###################################################################### -->
+		<h2>Long Presentation</h2>
+		<div style="text-align:center; width:80%; margin:0 auto;">
+			<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTl4UTCMUjUCKD3lfSeUdwOwLrCJBov9ZqKPd3ivkRfFFWCvop4ZQvyT4EqCYPacwNqN1jTUFOlqhO_/embed?start=false&loop=false&delayms=3000" frameborder="0" width="100%" height="448" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+		</div>
+		<br>
+		<i class="icon-book-open-1"></i><a href="./3dv-long+notes.pdf">Presentation</a> with notes.
+		<!-- ###################################################################### -->
+		<h2>Poster</h2>
+		<figure style="text-align:center;">
+			<a href="./3dv-poster.pdf">
+				<img src="./img/3dv-poster.png" style="border:solid 1px #89342f;" width="80%">
+			</a>
+		</figure>
+		<!-- ###################################################################### -->
+		<h2>Paper</h2>
+		<kbd style="display:inline-block">
+			<a href="./3dv-paper.pdf">
+				<img src="img/3dv-paper.montage.png">
+			</a>
+		</kbd>
+		<!-- ###################################################################### -->
+		<h2>BibTeX</h2>
+		<div class="bibtex">
+			@inproceedings{sztrajman2020hdr,<br>
+				&emsp;&emsp;&emsp;&emsp;author={Sztrajman, Alejandro and Neophytou, Alexandros and Weyrich, Tim and Sommerlade, Eric},<br>
+				&emsp;&emsp;&emsp;&emsp;booktitle={International Conference on 3D Vision (3DV)},<br>
+				&emsp;&emsp;&emsp;&emsp;title={High-Dynamic-Range Lighting Estimation From Face Portraits},<br>
+				&emsp;&emsp;&emsp;&emsp;year={2020},<br>
+				&emsp;&emsp;&emsp;&emsp;pages={355-363},<br>
+				&emsp;&emsp;&emsp;&emsp;doi={10.1109/3DV50981.2020.00045}<br>
+			}
+		</div>
+		<!-- ###################################################################### -->
+		<h2>Acknowledgement</h2>
+		<p>This project has received funding from the European Union’s Horizon 2020 research and innovation program under the Marie Skłodowska-Curie grant agreement No. 642841. The page template was inspired by <a href="https://elifons.github.io/assets/papers/icassp2021.html">this project</a>.</p>
+		<!-- ###################################################################### -->
+	</div>
+</body>
+</html>
+

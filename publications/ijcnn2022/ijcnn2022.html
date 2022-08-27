@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Neural BRDF Representation and Importance Sampling</title>
+<link rel="stylesheet" type="text/css" href="fontello/css/fontello-embedded.css">
+<link rel="stylesheet" type="text/css" href="typora.css">
+</head>
+
+<body class='typora-export'>
+	<div id='write'  class=''>
+		<h1>
+			<div style="text-align: center;"><span>Fast Blue-Noise Generation<br>via Unsupervised Learning</span></div>
+		</h1>
+		<ul>
+			<li><b style="font-size: 1.2em"><a href="https://scholar.google.com/citations?user=04u9QAIAAAAJ&hl=it">Daniele Giunchi<sup>*</sup></a></b></li>
+			<li><b style="font-size: 1.2em"><a href="http://www0.cs.ucl.ac.uk/staff/A.Sztrajman/webpage/index.html">Alejandro Sztrajman<sup>*</sup></a></b></li>
+			<li><b style="font-size: 1.2em"><a href="https://wp.cs.ucl.ac.uk/anthonysteed/">Anthony Steed</a></b></li>
+		</ul>
+		<ul>
+			Department of Computer Science, University College London, UK.<br>
+			<center><i>International Joint Conference on Neural Networks</i>, 2022.</center>
+			<p>&nbsp;</p>
+		</ul>
+		<center>
+			<figure>
+				<img src="images/ijcnn2022-teaser.jpg" style="width:100%;">
+				<br>
+			</figure>
+		</center>
+		<p><span>
+		Blue noise is known for its uniformity in the spatial domain, avoiding the appearance of structures such as voids and clusters. Because of this characteristic, it has been adopted in a wide range of visual computing applications, such as image dithering, rendering and visualisation. This has motivated the development of a variety of generative methods for blue noise, with different trade-offs in terms of accuracy and computational performance. We propose a novel unsupervised learning approach that leverages a neural network architecture to generate blue noise masks with high accuracy and real-time performance, starting from a white noise input. We train our model by combining three unsupervised losses that work by conditioning the Fourier spectrum and intensity histogram of noise masks predicted by the network. We evaluate our method by leveraging the generated noise for two applications: grayscale blue noise masks for image dithering, and blue noise samples for Monte Carlo integration.</span></p>
+		<p>&nbsp;</p>
+		<ul>
+			<li><i class="icon-book-open-1"></i><a href="ijcnn2022-preprint.pdf">Paper</a><br><font style='font-size:14px;'>PDF 1.5 MB</font></li>
+			<li><i class="icon-book-open-1"></i><a href="ijcnn2022-slides.pdf">Slides</a><br><font style='font-size:14px;'>PDF 2.8 MB</font></li>
+			<li style="vertical-align:top;"><i class="icon-github-circled"></i><b>Code</b><br>Coming Soon<font style='font-size:14px;'></font></li>
+		</ul>
+		<p>&nbsp;</p>
+		<!-- ###################################################################### -->
+		<hr />
+		<h2>
+			<a name="paper" class="md-header-anchor"></a><span>Paper</span>
+		</h2>
+		<p><kbd style="display:inline-block"><a href="./ijcnn2022-preprint.pdf"><img src="images/paper-montage.jpg"></a></kbd></p>
+		<p>&nbsp;</p>
+		<!-- ###################################################################### -->
+		<hr />
+		<h2>
+			<a name="bibtex" class="md-header-anchor"></a><span>BibTeX</span>
+		</h2>
+		<pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="latex"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="latex"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 8px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">@article<span class="cm-bracket">{</span>giunchi2022bluenoise,</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>author=<span class="cm-bracket">{</span>Daniele Giunchi and Alejandro Sztrajman and Anthony Steed<span class="cm-bracket">}</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  title = <span class="cm-bracket">{</span>Fast Blue-Noise Generation via Unsupervised Learning<span class="cm-bracket">}</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  booktitle = <span class="cm-bracket">{</span>International Joint Conference on Neural Networks<span class="cm-bracket">}</span>,</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  year = <span class="cm-bracket">{</span><span class="cm-atom">2022</span><span class="cm-bracket">}</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-bracket">}</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 162px;"></div><div class="CodeMirror-gutters" style="display: none; height: 162px;"></div></div></pre><p>&nbsp;</p>
+		<!-- ###################################################################### -->
+		<hr />
+		<h2>
+			<a name="acknowledgement" class="md-header-anchor"></a><span>Acknowledgement</span>
+		</h2>
+		<p><span>This work has been supported by H2020 EU project RISE, grant agreement No 739578. The authors would like to thank Stephanie Urquhart for providing the picture of her cat Meadow.</span></p>
+	</div>
+</body>
+</html>
+

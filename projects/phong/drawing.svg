@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1280"
+   height="720"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="New document 1">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="662.05113"
+     inkscape:cy="398.78169"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:snap-global="false"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1873"
+     inkscape:window-height="1027"
+     inkscape:window-x="-4"
+     inkscape:window-y="44"
+     inkscape:window-maximized="0">
+    <sodipodi:guide
+       orientation="0,1"
+       position="742.46212,502.04582"
+       id="guide3005" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="237.38585,735.39105"
+       id="guide3007" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="1040.4571,576.7971"
+       id="guide3009" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-332.36218)">
+    <text
+       xml:space="preserve"
+       style="font-size:80px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#817ed8;fill-opacity:1;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:Bitstream Charter;stroke-opacity:1"
+       x="639.49554"
+       y="432.02701"
+       id="text2985"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2987"
+         x="639.49554"
+         y="432.02701"
+         style="stroke:none;stroke-opacity:1;fill:#817ed8;fill-opacity:1">A basic 3D engine with</tspan><tspan
+         sodipodi:role="line"
+         x="639.49554"
+         y="532.02704"
+         id="tspan2993"
+         style="stroke:none;stroke-opacity:1;fill:#817ed8;fill-opacity:1">Phong shading</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:80px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#817ed8;fill-opacity:1;stroke:none;font-family:Bitstream Charter;-inkscape-font-specification:Bitstream Charter"
+       x="629.44702"
+       y="871.54492"
+       id="text2999"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3001"
+         x="629.44702"
+         y="871.54492"
+         style="font-size:60px;fill:#817ed8">A. Sztrajman</tspan><tspan
+         sodipodi:role="line"
+         x="629.44702"
+         y="946.54492"
+         id="tspan3003"
+         style="font-size:60px;fill:#817ed8">University of Buenos Aires</tspan></text>
+  </g>
+</svg>

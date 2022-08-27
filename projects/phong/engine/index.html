@@ -1,0 +1,438 @@
+<!DOCTYPE HTML>
+<html> 
+
+<head> 
+<title>WebGL 3D Engine</title> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+ 
+<script type="text/javascript" src="glMatrix.js"></script>
+<script type="text/javascript" src="color.js"></script>
+<script type="text/javascript" src="shaders.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript" src="primitivas.js"></script>
+<script type="text/javascript" src="jsonmodel.js"></script>
+<script type="text/javascript" src="escena.js"></script>  
+<script type="text/javascript" src="composite.js"></script>
+<script type="text/javascript" src="animation.js"></script>
+<script type="text/javascript" src="webgl-utils.js"></script>
+
+<!-- Fragment shader -->
+<script id="shader-fs" type="x-shader/x-fragment">
+	precision mediump float;
+
+	varying vec4 vPosition;
+	varying vec4 vColor;
+	varying vec3 vNormal;
+
+	uniform vec3 uLightPosition;
+	uniform vec4 uLightColor;
+	uniform vec4 uAmbientLightColor;
+	
+	uniform bool uAmbientLight;
+	uniform bool uDiffuseLight;
+	uniform bool uSpecularLight;
+
+	uniform float uKa;
+	uniform float uKd;
+	uniform float uKs;
+
+	void main(void) {
+		if (length(vPosition.xyz) < 500.0) {
+			//float kambient = 0.2;
+			//float kdiffuse = 0.6;
+			//float fatt = 0.6;
+			float glossyness = 20.0;
+
+			vec3 cameraDirection = normalize(-vPosition.xyz);
+			vec3 normalDirection = normalize(vNormal);
+			vec3 lightDirection = normalize(uLightPosition - vPosition.xyz);
+			vec3 reflectedDirection = reflect(-lightDirection, normalDirection);
+
+			vec4 fragmentColor = vec4(0, 0, 0, 0);
+
+			if (uAmbientLight) {
+				vec4 ambientColor = vColor * uAmbientLightColor * uKa; //* kambient;
+				fragmentColor = fragmentColor + ambientColor;
+			}
+
+			if (uDiffuseLight) {
+				vec4 diffuseColor = vColor * uLightColor * max(dot(normalDirection, lightDirection), 0.0) * uKd; //* kdiffuse;
+				fragmentColor = fragmentColor + diffuseColor;
+			}
+
+			if (uSpecularLight) {
+				vec4 specularColor = uLightColor * pow(max(dot(reflectedDirection, cameraDirection), 0.0), glossyness) * uKs; //* fatt;
+				fragmentColor = fragmentColor + specularColor;
+			}
+
+			gl_FragColor = vec4(fragmentColor.rgb, 1.0);
+		}
+		else
+			gl_FragColor = vColor;
+	}
+</script>
+
+<!-- Vertex shader -->
+<script id="shader-vs" type="x-shader/x-vertex">
+	attribute vec3 aVertexPosition;
+	attribute vec4 aVertexColor;
+	attribute vec3 aVertexNormal;
+
+	uniform mat4 uMVMatrix;
+	uniform mat4 uPMatrix;
+
+	varying vec4 vPosition;
+	varying vec4 vColor;
+	varying vec3 vNormal;
+
+	void main(void) {
+			gl_PointSize = 2.0;
+			vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
+			gl_Position = uPMatrix * vPosition;
+			vColor = aVertexColor;
+			vNormal = aVertexNormal;
+	}
+</script>
+
+<script type="text/javascript"> 
+	var gl;
+
+	var triangleBufferGL;
+	var triangleBuffer = [];
+	var triangleColorBufferGL;
+	var triangleColorBuffer = [];
+	var triangleNormalBufferGL;
+	var triangleNormalBuffer = [];
+	var pointBuffer = [];
+	var pointBufferGL;
+	var pointColorBuffer = [];
+	var pointColorBufferGL;
+	var pointNormalBufferGL;
+	var pointNormalBuffer = [];
+
+	var ambientLight;
+	var lightSources = [];
+	var lightAttributes = {
+		ka: 0.2,
+		kd: 0.6,
+		ks: 0.6
+	};
+
+	var escena;
+	var camera = new Camera();
+	camera.maxWalkingSpeed = 0.003;
+
+	var mvMatrix = mat4.create();
+	var pMatrix = mat4.create();
+
+	// GUI
+	var GUIMode;
+
+	function setUniforms() {
+		setMatrixUniforms();
+		setVectorUniforms();
+		setBoolUniforms();
+		setFloatUniforms();
+	}
+
+	function setMatrixUniforms() {
+		gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+		gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+	}
+
+	function setVectorUniforms() {
+		gl.uniform3fv(shaderProgram.lightPositionVecUniform, lightSources[0].vector());
+		gl.uniform4fv(shaderProgram.lightColorVecUniform, lightSources[0].c);
+		gl.uniform4fv(shaderProgram.ambientColorVecUniform, ambientLight);
+	}
+
+	function setFloatUniforms() {
+		gl.uniform1f(shaderProgram.kaUniform, lightAttributes.ka);
+		gl.uniform1f(shaderProgram.kdUniform, lightAttributes.kd);
+		gl.uniform1f(shaderProgram.ksUniform, lightAttributes.ks);
+	}
+	
+	function setBoolUniforms() {
+		var ambientLightTrue = document.getElementById("ambient").checked;
+		var diffuseLightTrue = document.getElementById("diffuse").checked;
+		var specularLightTrue = document.getElementById("specular").checked;
+
+		//console.log(ambientLightTrue);
+		gl.uniform1i(shaderProgram.ambientLightBoolUniform, ambientLightTrue);
+		gl.uniform1i(shaderProgram.diffuseLightBoolUniform, diffuseLightTrue);
+		gl.uniform1i(shaderProgram.specularLightBoolUniform, specularLightTrue);
+	}
+
+	function initGL(canvas) {
+		try {
+			gl = canvas.getContext("experimental-webgl");
+			gl.viewportWidth = canvas.width;
+			gl.viewportHeight = canvas.height;
+		} catch (e) {
+			alert("It's not possible to initialize WebGL");
+		}
+		if (!gl) {
+			alert("It's not possible to initialize WebGL");
+		}
+	}
+ 
+	function initBuffers() {
+		triangleBufferGL = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, triangleBufferGL);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleBuffer), gl.STATIC_DRAW);
+		triangleBufferGL.itemSize = 3;
+
+		triangleColorBufferGL = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, triangleColorBufferGL);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleColorBuffer), gl.STATIC_DRAW);
+		triangleColorBufferGL.itemSize = 4;
+
+		triangleNormalBufferGL = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, triangleNormalBufferGL);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleNormalBuffer), gl.STATIC_DRAW);
+		triangleNormalBufferGL.itemSize = 3;
+
+		pointBufferGL = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, pointBufferGL);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pointBuffer), gl.STATIC_DRAW);
+		pointBufferGL.itemSize = 3;
+
+		pointColorBufferGL = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, pointColorBufferGL);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pointColorBuffer), gl.STATIC_DRAW);
+		pointColorBufferGL.itemSize = 4;
+
+		pointNormalBufferGL = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, pointNormalBufferGL);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pointNormalBuffer), gl.STATIC_DRAW);
+		pointNormalBufferGL.itemSize = 3;
+	}
+
+	function setStatus(msg) {
+		var statusDiv = document.getElementById("status");
+		statusDiv.innerHTML = msg;
+	}
+
+	function toggleGUIMode() {
+		setGUIMode(!GUIMode);
+	}
+
+	// mode === true -> navigation
+	// mode === false -> edition
+	function setGUIMode(mode) {
+		var lightPosX = document.getElementById("lightx");
+		var lightPosY = document.getElementById("lighty");
+		var lightPosZ = document.getElementById("lightz");
+		var lightAmbientCheckBox = document.getElementById("ambient");
+		var lightDiffuseCheckBox = document.getElementById("diffuse");
+		var lightSpecularCheckBox = document.getElementById("specular");
+		var lightAmbientInput = document.getElementById("ka");
+		var lightDiffuseInput = document.getElementById("kd");
+		var lightSpecularInput = document.getElementById("ks");
+		var walkingspeedInput = document.getElementById("walkingspeed");
+
+		GUIMode = mode;
+		if (GUIMode === false)
+			setStatus("Press E for navigation mode");
+		else
+			setStatus("Press E for edition mode");
+
+		lightPosX.disabled = GUIMode;
+		lightPosY.disabled = GUIMode;
+		lightPosZ.disabled = GUIMode;
+		lightAmbientCheckBox.disabled = GUIMode;
+		lightDiffuseCheckBox.disabled = GUIMode;
+		lightSpecularCheckBox.disabled = GUIMode;
+		lightAmbientInput.disabled = GUIMode;
+		lightDiffuseInput.disabled = GUIMode;
+		lightSpecularInput.disabled = GUIMode;
+		walkingspeedInput.disabled = GUIMode;
+	}
+
+	function getCameraAttributes() {
+		var walkingspeedInput = document.getElementById("walkingspeed");
+		walkingspeedInput.value = camera.maxWalkingSpeed;
+	}
+	
+	function getLightAttributes() {
+		var lightPosX = document.getElementById("lightx");
+		var lightPosY = document.getElementById("lighty");
+		var lightPosZ = document.getElementById("lightz");
+		var lightAmbientInput = document.getElementById("ka");
+		var lightDiffuseInput = document.getElementById("kd");
+		var lightSpecularInput = document.getElementById("ks");
+		lightPosX.value = lightSources[0].x;
+		lightPosY.value = lightSources[0].y;
+		lightPosZ.value = lightSources[0].z;
+		lightAmbientInput.value = lightAttributes.ka;
+		lightDiffuseInput.value = lightAttributes.kd;
+		lightSpecularInput.value = lightAttributes.ks;
+	}
+
+	function setLightAttributes() {
+		var lightPosX = document.getElementById("lightx");
+		var lightPosY = document.getElementById("lighty");
+		var lightPosZ = document.getElementById("lightz");
+		var lightAmbientInput = document.getElementById("ka");
+		var lightDiffuseInput = document.getElementById("kd");
+		var lightSpecularInput = document.getElementById("ks");
+		lightSources[0].x = lightPosX.value;
+		lightSources[0].y = lightPosY.value;
+		lightSources[0].z = lightPosZ.value;
+		lightAttributes.ka = lightAmbientInput.value;
+		lightAttributes.kd = lightDiffuseInput.value;
+		lightAttributes.ks = lightSpecularInput.value;
+	}
+
+	function changeLight() {
+		setLightAttributes();
+// 		escena.draw();
+		changed = true;
+		dibujarEscena();
+	}
+	
+	function changeWalkingSpeed() {
+		var walkingspeedInput = document.getElementById("walkingspeed");
+		camera.maxWalkingSpeed = walkingspeedInput.value;
+	}
+
+	function webGLStart() {
+		var canvas = document.getElementById("canvas");
+
+		initGL(canvas);
+		initShaders();
+		initBuffers();
+
+		initEscena();
+		setGUIMode(true);
+		getLightAttributes();
+		getCameraAttributes();
+		escena.draw();
+		dibujarEscena();
+
+		//stolen
+		document.onkeydown = handleKeyDown;
+		document.onkeyup = handleKeyUp;
+		tick();
+	}
+ </script>
+
+<!-- CSS -->
+<style>
+	body {width:100%; height:100%; overflow:hidden, margin:0; background-color:black; color:white;}
+	html {width:100%; height:100%; overflow:hidden;}
+</style>
+
+</head> 
+	<body onload="webGLStart();">
+		<h1>WebGL 3D Engine</h1>
+		<hr/><br>
+
+		<table style="border-spacing:20px; border-style:none">
+		<tbody>
+			<tr>
+				<td style="vertical-align:top">
+					<table>
+						<tr>
+							<td style="width:500">
+								<canvas id="canvas" width="1000" height="500" style="border-style:solid; border-color:gray; border-width:1px;" 
+									onmouseup="handleMouseUp(event);"
+									onmousedown="handleMouseDown(event);"
+									onmousemove="handleMouseMove(event);">
+								</canvas>
+								<br>
+								Click on the canvas to move the camera. Press <b>AWSD</b> to move around.
+							</td>
+							<td style="vertical-align:top">
+								<!-- light attributes -->
+								<table style="border-style:solid; border-color:gray; border-width:1px;">
+
+									<!-- title -->
+									<tr><td colspan="2"><b>Light attributes</b><hr/></td></tr>
+									<!-- subtitle -->
+									<tr><td><i>Position</i></td></tr>
+									<tr style="vertical-align:top">
+										<td colspan="2">
+											<table>
+												<!-- position X -->
+												<td style="width:90px;text-align:left">
+													X <input id="lightx" type="number" value="0" disabled="disabled" style="width:50px" onchange="changeLight()" /></input><br/>
+												</td>
+												<!-- position Y -->
+												<td style="width:90px;text-align:center">
+													Y <input id="lighty" type="number" value="0" disabled="disabled" style="width:50px" onchange="changeLight()" /></input><br/>
+												</td>
+												<!-- position Z -->
+												<td style="width:90px;text-align:right">
+													Z <input id="lightz" type="number" value="0" disabled="disabled" style="width:50px" onchange="changeLight()" /></input><br/>
+												</td>
+											</table>
+										</td>
+									</tr>
+									<tr height="10"></tr>
+									<!-- subtitulo -->
+									<tr><td><i>Illumination effects</i></td></tr>
+									<tr style="vertical-align:top">
+										<td>
+											<input type="checkbox" onclick="changed=true;" id="ambient" disabled="disabled" checked />Ambience<br/>
+											<input type="checkbox" onclick="changed=true;" id="diffuse" disabled="disabled" checked />Diffuse<br/>
+											<input type="checkbox" onclick="changed=true;" id="specular" disabled="disabled" checked />Specular<br/>
+										</td>
+										<td style="text-align:right">
+											<math>
+												<mstyle mathcolor="Red" displaystyle="true">
+													<mrow>
+														<msub>
+															<mi>k</mi>
+															<mn>a</mn>
+														</msub>
+														<mo>=</mo>
+													<mrow>
+												</mstyle>
+											</math>
+											<input type="number" id="ka" value="0" style="width:50px" disabled="disabled" onchange="changeLight()" /></input><br/>
+											<math>
+												<mstyle mathcolor="Red" displaystyle="true">
+													<mrow>
+														<msub>
+															<mi>k</mi>
+															<mn>d</mn>
+														</msub>
+														<mo>=</mo>
+													<mrow>
+												</mstyle>
+											</math>
+											<input type="number" id="kd" value="0" style="width:50px" disabled="disabled" onchange="changeLight()" /></input><br/>
+											<math>
+												<mstyle mathcolor="Red" displaystyle="true">
+													<mrow>
+														<msub>
+															<mi>k</mi>
+															<mn>s</mn>
+														</msub>
+														<mo>=</mo>
+													<mrow>
+												</mstyle>
+											</math>
+											<input type="number" id="ks" value="0" style="width:50px" disabled="disabled" onchange="changeLight()" /></input></td>
+									</tr>
+									<tr height="60"></tr>
+									<tr>
+										<td>
+											<b>Walking speed</b>
+											<input type"number" id="walkingspeed" value="0" style="width:50px" disabled="disabled" onchange="changeWalkingSpeed()" />
+											</input>
+										</td>
+									<tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+		<div style="padding-left:20px" id="status">
+		</div>
+	</body>
+</html> 
