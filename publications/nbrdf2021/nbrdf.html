@@ -7,6 +7,25 @@
 <link rel="stylesheet" type="text/css" href="typora.css">
 </head>
 
+<!--<style>
+ul {
+    width: 100%;
+    text-align:center;
+    display: table;
+    table-layout: fixed; /* optional, for equal spacing */
+    border-collapse: collapse;
+/*     float:center; */
+    horizontal-align: middle;
+}
+li {
+    display: list-item;
+    float:center;
+    text-align: center;
+    border: 0px solid white;
+    vertical-align: middle;
+}
+</style>-->
+
 <body class='typora-export'>
 	<div id='write'  class=''>
 		<h1>
@@ -21,24 +40,32 @@
 		<ul>
 			Department of Computer Science, University College London, UK.<br>
 			<center><i>Computer Graphics Forum</i>, 2021 (EGSR 2022).</center>
-			<p>&nbsp;</p>
+<!-- 			<p>&nbsp;</p> -->
 		</ul>
 		<center>
 			<figure>
-				<img src="images/teaser3.jpg" style="width:100%;">
+				<img src="images/teaser10.png" style="width:100%;">
 <!-- 				&emsp;<img src="imgs/setup4_3.jpg" style="height:270px;"> -->
 				<br>
 			</figure>
 		</center>
+		<br>
 		<p><span>Controlled capture of real-world material appearance yields tabulated sets of highly realistic reflectance data. In practice, however, its high memory footprint requires compressing into a representation that can be used efficiently in rendering while remaining faithful to the original. Previous works in appearance encoding often prioritised one of these requirements at the expense of the other, by either applying high-fidelity array compression strategies not suited for efficient queries during rendering, or by fitting a compact analytic model that lacks expressiveness. We present a compact neural network-based representation of BRDF data that combines high-accuracy reconstruction with efficient practical rendering via built-in interpolation of reflectance. We encode BRDFs as lightweight networks, and propose a training scheme with adaptive angular sampling, critical for the accurate reconstruction of specular highlights. Additionally, we propose a novel approach to make our representation amenable to importance sampling: rather than inverting the trained networks, we learn an embedding that can be mapped to parameters of an analytic BRDF for which importance sampling is known. We evaluate encoding results on isotropic and anisotropic BRDFs from multiple real-world datasets, and importance sampling performance for isotropic BRDFs mapped to two different analytic models.</span></p>
 		<p>&nbsp;</p>
 		<ul>
 			<li><i class="icon-book-open-1"></i><a href="./sztrajman2021nbrdf.pdf">Paper</a><br><font style='font-size:14px;'>PDF 16 MB</font></li>
 			<li><i class="icon-book-open-1"></i><a href="./sztrajman2021nbrdf-lowres.pdf">Paper (lowres)</a><br><font style='font-size:14px;'>PDF 3.1 MB</font></li>
-			<!--<li style="vertical-align:top;"><i class="icon-github-circled"></i>Code<br>Coming Soon<font style='font-size:14px;'></font></li>-->
 			<li><i class="icon-book-open-1"></i><a href="./supplemental/pdfs/supplemental_merl.pdf">Supplemental MERL</a><br><font style='font-size:14px;'>PDF 55 MB</font></li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+			<li></li>
 			<li><i class="icon-book-open-1"></i><a href="./sztrajman2021neural-slides.pdf">Presentation Slides</a><br><font style='font-size:14px;'>PDF 5.9 MB</font></li>
+			<li></li>
 <!--			<li><i class="icon-book-open-1"></i><a href="./supplemental/pdfs/supplemental_rgl-isotropic.pdf">Supplemental RGL</a><br><font style='font-size:14px;'>PDF 4.8 MB</font></li>-->
+			<li style="vertical-align:top;"><i class="icon-github-circled"></i><a href="https://github.com/asztr/Neural-BRDF">Code</a><br><font style='font-size:14px;'></font></li>
+			<li></li>
 		</ul>
 		<p>&nbsp;</p>
 		<!-- ###################################################################### -->
@@ -57,8 +84,31 @@
 		<h2>
 			<a name="datasets" class="md-header-anchor"></a><span>Code and Pre-trained Models</span>
 		</h2>
-		<p><span>We provide pre-trained NBRDFs for measured materials from multiple databases.</span></p>
+		<p><span>Code is available in the <a href="https://github.com/asztr/Neural-BRDF">github repository</a>. We provide pre-trained NBRDFs for measured materials from multiple databases:</span></p>
 <!-- 		<p>&nbsp;</p> -->
+		<ul style="border-collapse: inherit; width:auto; vertical-align: baseline;">
+			<li style="display:list-item; text-align: left;"><font style='font-size:14px;'>Python code to train NBRDF networks.</font></li>
+			<li style="display:list-item; text-align: left;"><font style='font-size:14px;'>Mitsuba plugin (C++) to render using pre-trained NBRDFs.</font></li>
+			<li style="display:list-item; text-align: left;"><font style='font-size:14px;'>All materials from the <a href="https://www.merl.com/brdf/">MERL database</a>.</font></li>
+			<li style="display:list-item; text-align: left;"><font style='font-size:14px;'>Isotropic materials from the <a href="http://rgl.epfl.ch/materials">RGL database</a>.</font></li>
+			<li style="display:list-item; text-align: left;"><font style='font-size:14px;'>Materials from <a href="https://brdf.compute.dtu.dk/">Nielsen et al. (2015)</a>.</font></li>
+			<li style="display:list-item; text-align: left;"><font style='font-size:14px;'>NBRDF training script (alternative implementation in PyTorch by <a href="https://scholar.google.com/citations?user=CEeuDLcAAAAJ">Michael Fischer</a>).
+		</ul>
+
+<!-- 		<ol></ol> -->
+		<!--<ol>
+
+		</ol>
+		<ol>
+
+		</ol>
+		<ol>
+
+		</ol>
+		<ol>
+
+		</ol>-->
+<!--
 		<ol>
 			<li><i class="icon-floppy-1"></i><a href="./supplemental/nbrdf_code.zip">code.zip</a><font style="font-size:14px;"> (3.0 MB) Python code to train NBRDF networks, and Mitsuba plugin to render using pre-trained NBRDFs.</font></li>
 		</ol>
@@ -73,7 +123,7 @@
 		</ol>
 		<ol>
 			<li><i class="icon-floppy-1"></i><a href="./supplemental/pytorch_code.zip">pytorch_code.zip</a><font style='font-size:14px;'> (6 KB) NBRDF training script (alternative implementation in PyTorch by <a href="https://scholar.google.com/citations?user=CEeuDLcAAAAJ">Michael Fischer</a>).
-		</ol>
+		</ol>-->
 
 <!--		<ol>
 			<li><i class="icon-book-open"></i><a href="./supplemental/pdfs/supplemental_merl.pdf">supplemental_merl.pdf</a><font style='font-size:14px;'> (55 MB)</font></li>
@@ -81,7 +131,7 @@
 		<ol>
 			<i class="icon-book-open"></i><a href="./supplemental/pdfs/supplemental_rgl-isotropic.pdf">supplemental_rgl-isotropic.pdf</a><font style='font-size:14px;'> (4.8 MB)</font>
 		</ol>-->
-		<p>&nbsp;</p>
+<!-- 		<p>&nbsp;</p> -->
 		<!-- ###################################################################### -->
 		<hr />
 		<h2>
