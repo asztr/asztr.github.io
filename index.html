@@ -6,7 +6,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<style type="text/css" media="screen"> @import url("css/plone.css");</style>
 	<style type="text/css" media="all">@import url("css/ploneCustom_alternative.css");</style>
- 	<style type="text/css" media="all">@import url("css/ploneIEFixes.css");</style>
+	<style type="text/css" media="all">@import url("css/ploneIEFixes.css");</style>
 	<link rel="stylesheet" type="text/css" href="css/thumbnails.css" media="all"/>
 	<link rel="stylesheet" href="./css/aicons/css/academicons.min.css"/>
 	<link href="./css/fawesome/css/all.css" rel="stylesheet">
@@ -102,7 +102,7 @@
 		div.documentContent h3 {
 			margin-left: 40px;
 			float: left;
-		    font-size: 150%;
+			font-size: 150%;
 			font-weight: bold;
 			color: #303030;
 		}
@@ -134,7 +134,7 @@
 			<li><a href="#publications">Publications</a></li>
 			<li><a href="#patents">Patents</a></li>
 			<li><a href="#projects">Codes</a></li>
-			<li><a href="#talks">Talks</a></li>
+			<!-- <li><a href="#talks">Talks</a></li> -->
 			<li><a href="#teaching">Teaching</a></li>
 			<!--<li><a href="#bground">Background</a></li>-->
 		</div>
@@ -152,8 +152,8 @@
 				<td align="justify" valign="top">
 					<h2>Alejandro Sztrajman</h2>
 					<table>
-						I'm a Research Associate in the
-						<a href="https://www.cl.cam.ac.uk/research/rainbow/">Rainbow Group</a>
+						I'm a postdoctoral research associate
+						<!--in the <a href="https://www.cl.cam.ac.uk/research/rainbow/">Rainbow Group</a>-->
 						at the
 						<a href="https://www.cam.ac.uk/">University of Cambridge</a>.
 						I hold a PhD in Computer Science
@@ -163,7 +163,10 @@
 						under the supervision of Profs.
 						<a href="http://reality.cs.ucl.ac.uk/weyrich.php">Tim Weyrich</a> and
 						<a href="http://www.homepages.ucl.ac.uk/~ucactri/">Tobias Ritschel</a>.
-						My research is in the intersection between computer graphics, machine learning and computer vision, combining methods from physically-based rendering, neural fields and meta-learning for the representation of photorealistic material appearance and scene illumination.
+						My research is in the intersection between machine learning and visual computing,
+						combining methods from neural fields, hypernetworks, physically-based rendering
+						and generative models.
+						<!--representation of photorealistic material appearance and scene illumination.-->
 						<!-- appearance acquisition, visual perception, material synthesis, efficient rendering -->
 						My PhD project was funded by a
 						<a href="https://marie-sklodowska-curie-actions.ec.europa.eu/">Marie Curie Fellowship</a>,
@@ -194,7 +197,7 @@
 							15 JJ Thomson Avenue<br>
 							University of Cambridge, UK<br>
 							<!--Cambridge, CB3 0FD<br>-->
-<!-- 							United Kingdom<br> -->
+<!--							United Kingdom<br> -->
 							<br>
 							<a id="hoverAlpha" href="mailto:alejandro.sztrajman@cl.cam.ac.uk"><img class="hoverZoom" width="35px" src="./img/mail.png"></a>
 							<a id="hoverAlpha" href="http://ar.linkedin.com/in/asztrajman"><img class="hoverZoom" width="35px" src="./img/linkedin.png"></a>
@@ -237,7 +240,7 @@
 			table.publications span#venue {
 				display: inline-block;
 				font-style: italic;
-/* 					color: #505050; */
+/*					color: #505050; */
 				font-size: 0.9em;
 				//padding-top: 5px;
 			}
@@ -256,24 +259,79 @@
 				box-shadow: none;
 			}
 			div#keywords {
-	            display: inline-block;
-    	        margin-top: 5px;
+				display: inline-block;
+				margin-top: 5px;
 				font-size: .7rem;
-	        }
-        	div#keywords keys {
+			}
+			div#keywords keys {
 				color: #555555;
-	            margin-right: .25rem! important;
+				margin-right: .25rem! important;
 				//padding: .4rem;
 				border-radius: 5px;
 				white-space: nowrap;
-    	    }
-        /*div#links a:hover {
-            background-color: #434fb0;
-            color: #ffffff;
-        }*/
+			}
+		/*div#links a:hover {
+			background-color: #434fb0;
+			color: #ffffff;
+		}*/
 
 		</style>
 		<table class="publications">
+
+			<tr>
+				<td>
+					<a href="https://arxiv.org/abs/2311.12090">
+						<img id="nobox" src="./publications/frepolad2024/frepolad_thumbnail2.jpg">
+					</a>
+				</td>
+				<td>
+					<b>FrePolad: Frequency-Rectified Point Latent Diffusion for Point Cloud Generation</b><br>
+					Chenliang Zhou, Fangcheng Zhong, Param Hanji, Zhilin Guo, Kyle Thomas Fogarty, <b>Alejandro Sztrajman</b>, Hongyun Gao, Cengiz Oztireli<br>
+					<span id="venue">In Review (2023).</span><br>
+					<div id="keywords">Keywords: <keys>Diffusion Models, 3D Point Clouds.</keys></div><br>
+					<div id="links">
+						<a href="https://arxiv.org/abs/2311.12090">arXiv</a>
+						<a href="https://arxiv.org/pdf/2311.12090.pdf">PDF</a>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a href="https://openreview.net/pdf?id=yzfi15eVI7">
+						<img id="nobox" src="./publications/ihypertime2022/ihypertime-thumbnail2.jpg">
+					</a>
+				</td>
+				<td>
+					<b>iHyperTime: Interpretable Time Series Generation with Implicit Neural Representations</b><br>
+					Elizabeth Fons, <b>Alejandro Sztrajman</b>, Yousef El-Laham, Andrea Coletta, Alexandros Iosifidis, Svitlana Vyetrenko<br>
+					<span id="venue">In Review (2023).</span><br>
+					<div id="keywords">Keywords: <keys>Time-series, Neural Fields, Generative Models, Interpretability, Hypernetworks.</keys></div><br>
+					<div id="links">
+						<a href="https://openreview.net/pdf?id=yzfi15eVI7">PDF</a>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a href="https://arxiv.org/abs/2311.15783">
+						<img id="nobox" src="./publications/nbrdf+2023/nbrdf+_thumbnail2.jpg">
+					</a>
+				</td>
+				<td>
+					<b>Hypernetworks for Generalizable BRDF Estimation</b><br>
+					Fazilet Gozbudak, <b>Alejandro Sztrajman</b>, Chenliang Zhou, Fangcheng Zhong, Rafal Mantiuk, Cengiz Öztireli<br>
+					<span id="venue">In Review (2023).</span><br>
+					<div id="keywords">Keywords: <keys>Neural Fields, Hypernetworks, Generalizable Models, Material Appearance.</keys></div><br>
+					<div id="links">
+						<a href="https://arxiv.org/abs/2311.15783">arXiv</a>
+						<a href="https://arxiv.org/pdf/2311.15783.pdf">PDF</a>
+					</div>
+				</td>
+			</tr>
+
+			
 			<tr>
 				<td>
 					<a href="https://arxiv.org/abs/2306.08943">
@@ -282,9 +340,9 @@
 				</td>
 				<td>
 					<b>Neural Fields with Hard Constraints of Arbitrary Differential Order</b><br>
-					Fangcheng Zhong, Kyle Fogarty, Param Hanji, Tianhao Wu, Alejandro Sztrajman, Andrew Spielberg, Andrea Tagliasacchi, Petra Bosilj, Cengiz Oztireli<br>
+					Fangcheng Zhong, Kyle Fogarty, Param Hanji, Tianhao Wu, <b>Alejandro Sztrajman</b>, Andrew Spielberg, Andrea Tagliasacchi, Petra Bosilj, Cengiz Oztireli<br>
 					<span id="venue">NeurIPS (2023).</span><br>
-					<div id="keywords">Keywords: <keys>Neural Fields, Hypernetworks.</keys></div><br>
+					<div id="keywords">Keywords: <keys>Neural Fields, Hypernetworks, Constrained Learning.</keys></div><br>
 					<div id="links">
 						<a href="https://zfc946.github.io/CNF.github.io/">Webpage</a>
 						<a href="https://arxiv.org/abs/2306.08943">arXiv</a>
@@ -295,33 +353,18 @@
 
 			<tr>
 				<td>
-					<!--<a href="">-->
-						<img id="nobox" src="./publications/ihypertime2022/ihypertime-thumbnail2.jpg">
-					<!--</a>-->
-				</td>
-				<td>
-					<b>iHyperTime: Interpretable Time Series Generation with Implicit Neural Representations</b><br>
-					Elizabeth Fons, Alejandro Sztrajman, Yousef El-Laham, Andrea Coletta, Alexandros Iosifidis, Svitlana Vyetrenko<br>
-					<span id="venue">In Review (2023).</span><br>
-					<div id="keywords">Keywords: <keys>Time-series, Neural Fields, Generative Models, Interpretability, Hypernetworks.</keys></div><br>
-					<!--<div id="links">
-					</div>-->
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					<!--<a href="">-->
+					<a href="https://www.cl.cam.ac.uk/~rkm38/pdfs/ashraf2023_oled_calibration.pdf">
 						<img id="nobox" src="./publications/2023_hvei/hvei_thumbnail_crop.jpg">
-					<!--</a>-->
+					</a>
 				</td>
 				<td>
 					<b>Color Calibration Methods for OLED Displays</b><br>
-					Maliha Ashraf, Alejandro Sztrajman, Dounia Hammou, Rafał Mantiuk<br>
-					<span id="venue">In Review (2023).</span><br>
+					Maliha Ashraf, <b>Alejandro Sztrajman</b>, Dounia Hammou, Rafał Mantiuk<br>
+					<span id="venue">Color Imaging (2023).</span><br>
 					<div id="keywords">Keywords: <keys>Color Correction, Implicit Neural Representations.</keys></div><br>
-					<!--<div id="links">
-					</div>-->
+					<div id="links">
+						<a href="https://www.cl.cam.ac.uk/~rkm38/pdfs/ashraf2023_oled_calibration.pdf">PDF</a>
+					</div>
 				</td>
 			</tr>
 
@@ -333,7 +376,7 @@
 				</td>
 				<td>
 					<b>HyperTime: Implicit Neural Representations for Time-Series</b><br>
-					Elizabeth Fons, Alejandro Sztrajman, Yousef El-Laham, Alexandros Iosifidis, Svitlana Vyetrenko<br>
+					Elizabeth Fons, <b>Alejandro Sztrajman</b>, Yousef El-Laham, Alexandros Iosifidis, Svitlana Vyetrenko<br>
 					<span id="venue">NeurIPS SyntheticData4ML (2022).</span><br>
 					<div id="keywords">Keywords: <keys>Time-series, Neural Fields, Signal Processing, Hypernetworks.</keys></div><br>
 					<div id="links">
@@ -355,7 +398,7 @@
 				<td>
 					<b>Neural BRDF Representation and Importance Sampling</b>
 					(<font style="font-variant: small-caps; color:red;">Wiley Top Cited Paper</font>)<br>
-					Alejandro Sztrajman, Gilles Rainer, Tobias Ritschel, Tim Weyrich<br>
+					<b>Alejandro Sztrajman</b>, Gilles Rainer, Tobias Ritschel, Tim Weyrich<br>
 					<span id="venue">Computer Graphics Forum (CGF), 40(6), pp. 332-346, 2021 (Oral Presentation at EGSR 2022).</span><br>
 					<div id="keywords">Keywords: <keys>Material Appearance, Implicit Neural Representations, Meta-learning, Hypernetworks, Differentiable Rendering, Monte Carlo Sampling.</keys></div><br>
 					<div id="links">
@@ -379,7 +422,7 @@
 				</td>
 				<td>
 					<b>Fast Blue Noise Generation via Unsupervised Learning</b><br>
-					*Daniele Giunchi, *Alejandro Sztrajman, Anthony Steed<br>
+					*Daniele Giunchi, *<b>Alejandro Sztrajman</b>, Anthony Steed<br>
 					<span id="venue">International Joint Conference on Neural Networks (IJCNN), Padua, Italy, July 2022 (Oral Presentation).</span><br>
 					<div id="keywords">Keywords: <keys>Blue-Noise, Unsupervised Learning, Dithering, Monte Carlo Integration.</keys></div><br>
 					<div id="links">
@@ -400,7 +443,7 @@
 				</td>
 				<td>
 					<b>Machine Learning Applications in Appearance Modelling</b><br>
-					Alejandro Sztrajman<br>
+					<b>Alejandro Sztrajman</b><br>
 					<span id="venue">University College London, 2022 (PhD Thesis).</span><br>
 					<div id="keywords">
 						Reviewers: Profs.
@@ -424,7 +467,7 @@
 				</td>
 				<td>
 					<b>Mixing Modalities of 3D Sketching and Speech for Interactive Model Retrieval in Virtual Reality</b><br>
-					Daniele Giunchi, Alejandro Sztrajman, Stuart James, Anthony Steed<br>
+					Daniele Giunchi, <b>Alejandro Sztrajman</b>, Stuart James, Anthony Steed<br>
 					<span id="venue">ACM International Conference on Interactive Media Experiences (IMX), New York, USA, Jun 2021 (Oral Presentation).</span><br>
 					<div id="keywords">Keywords: <keys>Virtual Reality, 3D Sketching, CNNs, Human-in-the-loop.</keys></div><br>
 					<div id="links">
@@ -446,7 +489,7 @@
 				</td>
 				<td>
 					<b>High-Dynamic-Range Lighting Estimation from Face Portraits</b><br>
-					Alejandro Sztrajman, Alexandros Neophytou, Tim Weyrich, Eric Sommerlade<br>
+					<b>Alejandro Sztrajman</b>, Alexandros Neophytou, Tim Weyrich, Eric Sommerlade<br>
 					<span id="venue">International Conference on 3D Vision (3DV), Fukoka, Japan, Nov 2020 (Oral Presentation).</span><br>
 					<div id="keywords">Keywords: <keys>HDR Lighting, CNNs, Inverse Rendering, Light Estimation.</keys></div><br>
 					<div id="links">
@@ -469,7 +512,7 @@
 				</td>
 				<td>
 					<b>Image-based remapping of spatially-varying material appearance</b><br>
-					Alejandro Sztrajman, Jaroslav Krivanek, Alexander Wilkie, Tim Weyrich<br>
+					<b>Alejandro Sztrajman</b>, Jaroslav Krivanek, Alexander Wilkie, Tim Weyrich<br>
 					<span id="venue">Journal of Computer Graphics Techniques (JCGT), 8(4), pp. 1-30, 2019.</span><br>
 					<div id="keywords">Keywords: <keys>Material Appearance, SVBRDF, Non-linear Optimization, Neural Networks.</keys></div><br>
 					<div id="links">
@@ -495,7 +538,7 @@
 				</td>
 				<td>
 					<b>Image-based remapping of material appearance</b><br>
-					Alejandro Sztrajman, Jaroslav Krivanek, Alexander Wilkie, Tim Weyrich<br>
+					<b>Alejandro Sztrajman</b>, Jaroslav Krivanek, Alexander Wilkie, Tim Weyrich<br>
 					<span id="venue">Eurographics Workshop on Material Appearance Modeling (MAM), Helsinki, Finland, Jun 2017 (Oral Presentation).</span><br>
 					<div id="keywords">Keywords: <keys>Material Appearance, BRDF, Non-linear Optimization.</keys></div><br>
 					<div id="links">
@@ -520,7 +563,7 @@
 				</td>
 				<td>
 					<b>Generating Interpretable Time Series By Meta-Learning With Implicit Neural Representation</b><br>
-					Elizabeth Fons, Alejandro Sztrajman, Yousef El-Laham, Alexandros Iosifidis, Svitlana Vyetrenko<br>
+					Elizabeth Fons, <b>Alejandro Sztrajman</b>, Yousef El-Laham, Alexandros Iosifidis, Svitlana Vyetrenko<br>
 					<span id="venue">US Patent (Pending, 2022)</span><br>
 					<!--<div id="links">
 					</div>-->
@@ -535,7 +578,7 @@
 				</td>
 				<td>
 					<b>Estimating Illumination in an Environment Based on an Image of a Reference Object</b><br>
-					Alexandros Neophytou, Eric Sommerlade, Alejandro Sztrajman, Sunando Sengupta<br>
+					Alexandros Neophytou, Eric Sommerlade, <b>Alejandro Sztrajman</b>, Sunando Sengupta<br>
 					<span id="venue">US Patent 0116549 A1 (2022).</span><br>
 					<div id="links">
 						<!--<a href="https://scholar.google.com/scholar?oi=bibs&cluster=5095571253552234732&btnI=1&hl=en">Page</a>-->
@@ -547,11 +590,11 @@
 		</table>
 
 		<!-- ################################################################ -->
-		<h2 id="projects">Other Codes</h2>
+		<h2 id="projects">Some Old Codes</h2>
 		<style>
 			table.projects {
 				margin-left: 40px;
-/* 					display: inline-block; */
+/*					display: inline-block; */
 				border-spacing: 0px 10px;
 				vertical-align: top;
 			}
@@ -599,7 +642,7 @@
 
 			table.projects div#tags li {
 				vertical-align: bottom;
-/* 					box-shadow: 0 2px 8px 0 rgb(0 0 17 / 10%); */
+/*					box-shadow: 0 2px 8px 0 rgb(0 0 17 / 10%); */
 				display: inline-block;
 				border: solid 1px #434fb0; /*#8cacbb;*/ /*#ea853a;*/
 				border-radius: 5px;
@@ -963,6 +1006,19 @@
 			<col width="auto">
 			<col width="140">
 			<col align="right" width="auto">
+			<tr>
+				<td><b>2023</b></td>
+				<td><a href="https://www.cl.cam.ac.uk/teaching/2324/AGIP/">Advanced Graphics and Image Processing</a></td>
+				<td></td>
+				<td>Cambridge</td>
+			</tr>
+			<tr>
+				<td><b>2023</b></td>
+				<td><a href="https://www.cl.cam.ac.uk/teaching/2324/Graphics/">Introduction to Graphics</a></td>
+				<td></td>
+				<td>Cambridge</td>
+			</tr>
+
 			<!--<tr>
 				<td><b>2019</b></td>
 				<td>Introduction to Virtual Reality (MOOC)</td>
@@ -978,7 +1034,7 @@
 				</td>
 				<!--<td><a href="http://www.cs.ucl.ac.uk/1819/A7P/T2/COMP0089_Advanced_Deep_Learning_and_Reinforcement_Learning/"></a></td>-->
 				<td></td>
-				<td>DeepMind/UCL</td>
+				<td>UCL/DeepMind</td>
 			</tr>
 			<tr>
 				<td><b>2018</b></td>
