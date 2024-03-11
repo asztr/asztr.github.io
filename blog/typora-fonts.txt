@@ -1,0 +1,25 @@
+Blubook (Glow Sans SC x 3)
+Catfish (Source Han Sans SC x 3)
+Dropbox (Open Sans x 3)
+Eloquent (Lato + Libre Baskerville + Lato)
+Gitbook (Roboto x 3)
+Github (Open Sans x 3)
+Gitlab (Open Sans x 3)
+Lostkeys (Source Sans Pro x 3)
+Next Helvetica (HelveticaN x 3)
+Paper (Computer Modern x 3)
+Pixyll (Lato + Merriweather + Lato)
+Refine (switched to light) (SangBlue Empire + Ivy Journal + Apple System)
+Ursine Polar Cyrillic (Adelle Cyrillic + Avenir Next Cyr + Adelle Cyrillic)
+
+
+Title:
+	Open Sans, Lucida Grande, Lato, Computer Modern,
+	SangBleu Empire, Ubuntu, Josefin Sans, Vollkorn, Fira Sans,
+	Libre Baskerville, Quattrocento
+
+Text: Open Sans, Helvetica Neue, Computer Modern, Ivy Journal, Ubuntu
+
+URLs: #50708B
+
+Pixyll, Blubook, Gitbook Teal, Catfish, Lostkeys
