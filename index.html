@@ -4,128 +4,13 @@
 
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-	<style type="text/css" media="screen"> @import url("css/plone.css");</style>
-	<style type="text/css" media="all">@import url("css/ploneCustom_alternative.css");</style>
+	<style type="text/css" media="all">@import url("css/ploneCustom.css");</style>
 	<style type="text/css" media="all">@import url("css/ploneIEFixes.css");</style>
-	<link rel="stylesheet" type="text/css" href="css/thumbnails.css" media="all"/>
+	<style type="text/css" media="all">@import url("css/items.css");</style>
 	<link rel="stylesheet" href="./css/aicons/css/academicons.min.css"/>
 	<link href="./css/fawesome/css/all.css" rel="stylesheet">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VV22DCGBKT"></script>
-	<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-VV22DCGBKT'); </script>
-	<style>
-		:root {
-			--spacing: 6px;
-			--max-width: 1050px;
-		}
-
-		body {
-			background-color: #ffffff; /*#F7F7F7;*/
-		}
-		/* ------------------ */
-		div.navbar {
-			width: 100%;
-			border-bottom: solid 0.5px #00000011;
-		}
-		
-		div.navlinks {
-			max-width: var(--max-width);
-			margin: 0 auto;
-			margin-top: 0px;
-			text-align: right;
-			padding-top: 25px;
-			padding-bottom: 2px;
-			padding-left: 1em;
-			padding-right: 1.5em;
-			vertical-align: bottom;
-			border: none;
-		}
-
-		div.navbar li {
-			margin: 0 auto;
-			display: inline-block;
-			list-style-type: none;
-			padding-left: 15px;
-			font-family: "Lato";
-			font-size: 16px;
-		}
-
-		div.navbar li a {
-			color: #909090;
-			font-weight: 100;
-		}
-
-		div.navbar li a:hover {
-			color: #000000;
-		}
-
-		div.footer {
-			width: 100%;
-			height: 25px;
-			border-top: solid 0.5px #00000011;
-		}
-		
-		div.footer-text {
-			max-width: var(--max-width);
-			margin: 0 auto;
-			text-align: right;
-			height: 50px;
-			padding-top: 10px;
-			filter: opacity(50%);
-		}
-		/* ------------------ */
-		div.documentContent {
-			max-width: var(--max-width);
-			margin:0 auto;
-			margin-top:10px;
-			margin-bottom:10px;
-			background-color: inherit;
-		}
-
-		div.documentContent a {
-			color: #434fb0;
-		}
-
-		div.documentContent a:hover {
-			filter: brightness(110%);
-		}
-
-		div.documentContent a#hoverAlpha:hover {
-			filter: opacity(50%);
-		}
-
-		div.documentContent h2 {
-			border-bottom: 1px solid #e3e3e3;
-			margin-top: 30px;
-			margin-bottom: 20px;
-		}
-
-		div.documentContent h3 {
-			margin-left: 40px;
-			float: left;
-			font-size: 150%;
-			font-weight: bold;
-			color: #303030;
-		}
-		/* ------------------ */
-		div#links {
-			display: inline-block;
-			margin-top: 10px;
-		}
-
-		div#links a {
-			color: #434fb0;
-			margin-right: .25rem! important;
-			padding: .4rem;
-			font-size: .9rem;
-			border-radius: 5px;
-			white-space: nowrap;
-		}
-
-		div#links a:hover {
-			background-color: #434fb0;
-			color: #ffffff;
-		}
-	</style>
+	<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-VV22DCGBKT');</script>
 </head>
 
 <body>
@@ -196,8 +81,7 @@
 							William Gates Building<br>
 							15 JJ Thomson Avenue<br>
 							University of Cambridge, UK<br>
-							<!--Cambridge, CB3 0FD<br>-->
-<!--							United Kingdom<br> -->
+							<!--Cambridge, CB3 0FD<br>United Kingdom<br>-->
 							<br>
 							<a id="hoverAlpha" href="mailto:alejandro.sztrajman@cl.cam.ac.uk"><img class="hoverZoom" width="35px" src="./img/mail.png"></a>
 							<a id="hoverAlpha" href="http://ar.linkedin.com/in/asztrajman"><img class="hoverZoom" width="35px" src="./img/linkedin.png"></a>
@@ -213,74 +97,7 @@
 		</table>
 		<!-- ################################################################ -->
 		<h2 id="publications">Publications</h2>
-		<style>
-			table.publications {
-				margin-left: 40px;
-				border-spacing: 0px 20px;
-				margin-top: 0px;
-			}
-
-			table.publications tr {
-				background-color: #ffffff;
-				margin-top: 0px;
-			}
-
-			table.publications tr:hover {
-				background-color: #fafafa;
-			}
-
-			table.publications td:nth-child(1) {
-				text-align: center;
-				width: 220px;
-				padding-right: 30px;
-			}
-
-			table.publications td:nth-child(2) {
-				text-align: left;
-				padding: 0px;
-			}
-
-			table.publications span#venue {
-				display: inline-block;
-				font-style: italic;
-/*					color: #505050; */
-				font-size: 0.9em;
-				//padding-top: 5px;
-			}
-			
-			table.publications img {
-				border:solid black;
-				border-width:1px;
-				width:100%;
-				box-shadow: 5px 5px 5px #888888;
-				image-rendering: -webkit-optimize-contrast;
-			}
-			
-			table.publications img#nobox {
-				border:none;
-				width:100%;
-				box-shadow: none;
-			}
-			div#keywords {
-				display: inline-block;
-				margin-top: 5px;
-				font-size: .7rem;
-			}
-			div#keywords keys {
-				color: #555555;
-				margin-right: .25rem! important;
-				//padding: .4rem;
-				border-radius: 5px;
-				white-space: nowrap;
-			}
-		/*div#links a:hover {
-			background-color: #434fb0;
-			color: #ffffff;
-		}*/
-
-		</style>
 		<table class="publications">
-
 			<tr>
 				<td>
 					<a href="https://arxiv.org/abs/2311.12090">
@@ -321,7 +138,7 @@
 			<tr>
 				<td>
 					<a href="https://arxiv.org/abs/2311.15783">
-						<img id="nobox" src="./publications/nbrdf+2023/nbrdf+_thumbnail2.jpg">
+						<img src="./publications/nbrdf+2023/nbrdf+_thumbnail3.jpg">
 					</a>
 				</td>
 				<td>
@@ -599,70 +416,6 @@
 
 		<!-- ################################################################ -->
 		<h2 id="projects">Some Old Codes</h2>
-		<style>
-			table.projects {
-				margin-left: 40px;
-/*					display: inline-block; */
-				border-spacing: 0px 10px;
-				vertical-align: top;
-			}
-
-			table.projects tr:hover {
-				background-color:#fafafa;
-			}
-
-			table.projects td:nth-child(1) {
-				width: 220px;
-				padding-right: 15px;
-			}
-
-			table.projects td:nth-child(2) {
-				width: 250px;
-				text-align:left;
-				padding-right: 10px;
-				font-size: 14px;
-			}
-
-			table.projects img, table.projects video {
-				width: 220px;
-				border-radius: 10px;
-				box-shadow: 5px 5px 5px #888888;
-				border: 1px solid #000000;
-			}
-
-			table.projects img#nobox, table.projects video#nobox {
-				width: 220px;
-				border: none;
-				box-shadow: none;
-				border-radius: 0px;
-			}
-
-			:root {
-				--spacing: 6px;
-			}
-
-			table.projects div#tags {
-				cursor: default;
-				margin-top: 10px;
-				display: block;
-				vertical-align: bottom;
-			}
-
-			table.projects div#tags li {
-				vertical-align: bottom;
-/*					box-shadow: 0 2px 8px 0 rgb(0 0 17 / 10%); */
-				display: inline-block;
-				border: solid 1px #434fb0; /*#8cacbb;*/ /*#ea853a;*/
-				border-radius: 5px;
-				color: #434fb0; /*#8cacbb;*/ /*#ea853a;*/
-				font-size: 0.7em;
-				text-shadow: 0 1px 0 #fff;
-				padding: calc(var(--spacing) / 2) var(--spacing);
-				margin: 0 var(--spacing) var(--spacing) 0;
-				white-space: nowrap;
-				cursor: default;
-			}
-		</style>
 		<div style="display:inline-block;">
 		<table class="projects" style="width:46%; float:left;">
 			<tr>
@@ -767,8 +520,8 @@
 					<br>
 					<a href="./projects/aslam/aslam.pdf">[Report]</a>
 				</td>
-			</tr>
-		</table>-->
+			</tr>-->
+		</table>
 		<table class="projects" style="width:46%; float:right;">
 			<tr>
 				<td>
@@ -848,26 +601,6 @@
 		</td>-->
 		<!-- ################################################################ -->
 		<!--<h2 id="articles">Short Articles</h2>-->
-		<style>
-			table.blog {
-				margin-left:40px;
-				border-spacing: 0px 10px;
-			}
-
-			table.blog tr:hover {
-				background-color: #fafafa;
-			}
-
-			table.blog span {
-				color:#555555;
-				font-size:14px;
-				font-weight:100;
-			}
-
-			table.blog td a:hover {
-				border-bottom: solid 1px;
-			}
-		</style>
 		<!--<table class="blog">
 			<col width="60px">
 			<col width="800px" align="left">
@@ -878,17 +611,9 @@
 					<a href="./blog/rnvp/rnvp.html">Generative Models &mdash; Real NVP Networks</a><br>
 					<span>June 2021</span>
 				</td>
-			</tr>-->
+			</tr>
 
-			<!--<tr>
-				<td><img src="./img/stats_thumb.png" width="100%"></td>
-				<td>
-					<a href="">Statistical Analysis &mdash; A Guide to Evaluate Machine Learning Classifiers</a><br>
-					<span>July 2021</span>
-				</td>
-			</tr>-->
-
-			<!--<tr>
+			<tr>
 				<td><img src="./img/stats_thumb.png" width="100%"></td>
 				<td>
 					<a href="./blog/stats/friedman.html">Statistical Analysis &mdash; Friedman Test</a><br>
@@ -898,40 +623,6 @@
 		</table>-->
 		<!-- ################################################################ -->
 		<!--<h2 id="talks">Talks</h2>
-		<style>
-			table.talks {
-				margin-left:40px;
-				border-spacing: 10px 10px;
-			}
-
-			table.talks tr:hover {
-				background-color: #fafafa;
-			}
-			
-			table.talks span {
-				color:#555555;
-				font-size:14px;
-				font-weight:100;
-			}
-
-			table.talks div#tags {
-				cursor: default;
-				margin-top: 5px;
-			}
-
-			table.talks div#tags li {
-				display: inline-block;
-				border: solid 1px #8cacbb; /*#ea853a;*/
-				border-radius: 5px;
-				color: #8cacbb; /*#ea853a;*/
-				font-size: 0.7em;
-				text-shadow: 0 1px 0 #fff;
-				padding: calc(var(--spacing) / 2) var(--spacing);
-				margin: 0 var(--spacing) var(--spacing) 0;
-				white-space: nowrap;
-				cursor: default;
-			}
-		</style>
 		<table class="talks">
 			<col width="60px">
 			<col width="800px" align="left">
@@ -998,17 +689,6 @@
 		</table>-->
 		<!-- ################################################################ -->
 		<h2 id="teaching">Teaching</h2>
-		<style>
-			table.teaching {
-				text-align:"center";
-				border:"0";
-				margin-left:40px;
-			}
-			
-			table.teaching tr:hover {
-				background-color: #fafafa;
-			}
-		</style>
 		<table class="teaching">
 			<col width="4em">
 			<col width="auto">
@@ -1071,26 +751,6 @@
 		</table>
 		<!-- ################################################################ -->
 		<!-- <h2 id="bground">Background</h2>
-		<style>
-			table.bground {
-				margin-left:40px;
-				border-spacing: 10px 10px;
-			}
-
-			table.bground tr:hover {
-				background-color: #fafafa;
-			}
-			
-			table.bground span {
-				color:#555555;
-				font-size:14px;
-				font-weight:100;
-			}
-
-			table.bground td:nth-of-type(1) {
-				text-align: center;
-			}
-		</style>
 		<table class="bground">
 			<col width="60px">
 			<col width="800px">
@@ -1179,17 +839,13 @@
 
 		<!-- ################################################################ -->
 	</div>
+
 	<br><br><br><br>
 	<div class="footer">
 		<div class="footer-text">
 			Alejandro Sztrajman<br>
-			<a href="a.sztrajman@ucl.ac.uk">a.sztrajman@ucl.ac.uk</a>
+			<a href="alejandro.sztrajman@cl.cam.ac.uk">alejandro.sztrajman@cl.cam.ac.uk</a>
 		</div>
 	</div>
 </body>
-<!-- <div id="portal-footer" style="margin-top:60px; margin-bottom:0px; padding-bottom:10px;"> -->
-<!-- <div style="margin-top:60px; padding-top:10px; border-top:solid 1px #e3e3e3; text-align:right; font-size:10px;"> -->
-<!--	Alejandro Sztrajman<br>
-	<a href="mailto:a.sztrajman@ucl.ac.uk">a.sztrajman@ucl.ac.uk</a><br>
-</div>-->
 </html>
