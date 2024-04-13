@@ -1,0 +1,237 @@
+
+/* ----------- PUBLICATIONS ITEMS ----------- */
+table.publications {
+	margin-left: 40px;
+	border-spacing: 0px 20px;
+	margin-top: 0px;
+}
+
+table.publications tr {
+	background-color: #ffffff;
+	margin-top: 0px;
+}
+
+table.publications tr:hover {
+	background-color: #fafafa;
+}
+
+table.publications td:nth-child(1) {
+	text-align: center;
+	width: 220px;
+	padding-right: 30px;
+}
+
+table.publications td:nth-child(2) {
+	text-align: left;
+	padding: 0px;
+}
+
+table.publications span#venue {
+	display: inline-block;
+	font-style: italic;
+	/* color: #505050; */
+	font-size: 0.9em;
+	/*padding-top: 5px;*/
+}
+
+table.publications img {
+	border:solid black;
+	border-width:1px;
+	width:100%;
+	box-shadow: 5px 5px 5px #888888;
+	image-rendering: -webkit-optimize-contrast;
+}
+
+table.publications img#nobox {
+	border:none;
+	width:100%;
+	box-shadow: none;
+}
+
+div#links {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+div#links a {
+	color: #434fb0;
+	margin-right: .25rem! important;
+	padding: .4rem;
+	font-size: .9rem;
+	border-radius: 5px;
+	white-space: nowrap;
+}
+
+div#links a:hover {
+	background-color: #434fb0;
+	color: #ffffff;
+}
+
+div#keywords {
+	display: inline-block;
+	margin-top: 5px;
+	font-size: .7rem;
+}
+
+div#keywords keys {
+	color: #555555;
+	margin-right: .25rem! important;
+	/*padding: .4rem;*/
+	border-radius: 5px;^
+	white-space: nowrap;
+}
+
+/*div#links a:hover {
+background-color: #434fb0;
+color: #ffffff;
+}*/
+
+/* ----------- PROJECTS / OLD CODES ITEMS ----------- */
+:root {
+	--spacing: 6px;
+}
+
+table.projects {
+	margin-left: 40px;
+	/* display: inline-block; */
+	border-spacing: 0px 10px;
+	vertical-align: top;
+}
+
+table.projects tr:hover {
+	background-color:#fafafa;
+}
+
+table.projects td:nth-child(1) {
+	width: 220px;
+	padding-right: 15px;
+}
+
+table.projects td:nth-child(2) {
+	width: 250px;
+	text-align:left;
+	padding-right: 10px;
+	font-size: 14px;
+}
+
+table.projects img, table.projects video {
+	width: 220px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px #888888;
+	border: 1px solid #000000;
+}
+
+table.projects img#nobox, table.projects video#nobox {
+	width: 220px;
+	border: none;
+	box-shadow: none;
+	border-radius: 0px;
+}
+
+table.projects div#tags {
+	cursor: default;
+	margin-top: 10px;
+	display: block;
+	vertical-align: bottom;
+}
+
+table.projects div#tags li {
+	vertical-align: bottom;
+	/* box-shadow: 0 2px 8px 0 rgb(0 0 17 / 10%); */
+	display: inline-block;
+	border: solid 1px #434fb0; /*#8cacbb;*/ /*#ea853a;*/
+	border-radius: 5px;
+	color: #434fb0; /*#8cacbb;*/ /*#ea853a;*/
+	font-size: 0.7em;
+	text-shadow: 0 1px 0 #fff;
+	padding: calc(var(--spacing) / 2) var(--spacing);
+	margin: 0 var(--spacing) var(--spacing) 0;
+	white-space: nowrap;
+	cursor: default;
+}
+
+/* ----------- TALKS ITEMS ----------- */
+table.talks {
+	margin-left:40px;
+	border-spacing: 10px 10px;
+}
+
+table.talks tr:hover {
+	background-color: #fafafa;
+}
+
+table.talks span {
+	color:#555555;
+	font-size:14px;
+	font-weight:100;
+}
+
+table.talks div#tags {
+	cursor: default;
+	margin-top: 5px;
+}
+
+table.talks div#tags li {
+	display: inline-block;
+	border: solid 1px #8cacbb; /*#ea853a;*/
+	border-radius: 5px;
+	color: #8cacbb; /*#ea853a;*/
+	font-size: 0.7em;
+	text-shadow: 0 1px 0 #fff;
+	padding: calc(var(--spacing) / 2) var(--spacing);
+	margin: 0 var(--spacing) var(--spacing) 0;
+	white-space: nowrap;
+	cursor: default;
+}
+
+/* ----------- BLOGS ITEMS ----------- */
+table.blog {
+	margin-left:40px;
+	border-spacing: 0px 10px;
+}
+
+table.blog tr:hover {
+	background-color: #fafafa;
+}
+
+table.blog span {
+	color:#555555;
+	font-size:14px;
+	font-weight:100;
+}
+
+table.blog td a:hover {
+	border-bottom: solid 1px;
+}
+
+/* ----------- TEACHING ITEMS ----------- */
+table.teaching {
+	text-align:"center";
+	border:"0";
+	margin-left:40px;
+}
+
+table.teaching tr:hover {
+	background-color: #fafafa;
+}
+
+/* ----------- BACKGROUND ITEMS ----------- */
+table.bground {
+	margin-left:40px;
+	border-spacing: 10px 10px;
+}
+
+table.bground tr:hover {
+	background-color: #fafafa;
+}
+
+table.bground span {
+	color:#555555;
+	font-size:14px;
+	font-weight:100;
+}
+
+table.bground td:nth-of-type(1) {
+	text-align: center;
+}
+
