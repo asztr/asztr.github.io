@@ -2,7 +2,7 @@
 /* ----------- PUBLICATIONS ITEMS ----------- */
 table.publications {
 	margin-left: 40px;
-	border-spacing: 0px 20px;
+	border-spacing: 0px 55px;
 	margin-top: 0px;
 }
 
@@ -30,8 +30,9 @@ table.publications span#venue {
 	display: inline-block;
 	font-style: italic;
 	/* color: #505050; */
-	font-size: 0.9em;
-	/*padding-top: 5px;*/
+	/* font-size: 0.9em; */
+	font-weight: 600;
+	padding-top: 5px;
 }
 
 table.publications img {
@@ -57,7 +58,7 @@ div#links a {
 	color: #434fb0;
 	margin-right: .25rem! important;
 	padding: .4rem;
-	font-size: .9rem;
+	/* font-size: .9rem; */
 	border-radius: 5px;
 	white-space: nowrap;
 }
@@ -70,7 +71,7 @@ div#links a:hover {
 div#keywords {
 	display: inline-block;
 	margin-top: 5px;
-	font-size: .7rem;
+	font-size: .8rem;
 }
 
 div#keywords keys {
@@ -92,10 +93,11 @@ color: #ffffff;
 }
 
 table.projects {
-	margin-left: 40px;
-	/* display: inline-block; */
-	border-spacing: 0px 10px;
+	border-spacing: 0px 55px;
 	vertical-align: top;
+	margin-left: 0px;
+	white-space: normal;
+	display:inline-block;
 }
 
 table.projects tr:hover {
@@ -103,26 +105,24 @@ table.projects tr:hover {
 }
 
 table.projects td:nth-child(1) {
-	width: 220px;
 	padding-right: 15px;
 }
 
 table.projects td:nth-child(2) {
-	width: 250px;
+	max-width: 230px;
 	text-align:left;
 	padding-right: 10px;
 	font-size: 14px;
 }
 
 table.projects img, table.projects video {
-	width: 220px;
+	width: 200px;
 	border-radius: 10px;
 	box-shadow: 5px 5px 5px #888888;
 	border: 1px solid #000000;
 }
 
 table.projects img#nobox, table.projects video#nobox {
-	width: 220px;
 	border: none;
 	box-shadow: none;
 	border-radius: 0px;
