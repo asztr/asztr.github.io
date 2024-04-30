@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /publications/pb_nbrdf2024/Physics_Based_Neural_BRDF.pdf
+Disallow: /cv_asztrajman.pdf
