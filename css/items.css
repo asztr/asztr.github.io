@@ -160,6 +160,11 @@ table.talks tr:hover {
 	background-color: #fafafa;
 }
 
+table.talks td#logo {
+	text-align: center;
+	vertical-align: middle;
+}
+
 table.talks span {
 	color:#555555;
 	font-size:14px;
