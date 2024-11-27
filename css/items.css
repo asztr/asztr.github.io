@@ -1,7 +1,8 @@
 
 /* ----------- PUBLICATIONS ITEMS ----------- */
 table.publications {
-	margin-left: 40px;
+	/* margin-left: 40px; */
+	margin-left: 1%;
 	border-spacing: 0px 55px;
 	margin-top: 0px;
 }
@@ -17,8 +18,8 @@ table.publications tr:hover {
 
 table.publications td:nth-child(1) {
 	text-align: center;
-	width: 220px;
-	padding-right: 30px;
+	width: 250px;
+	padding-right: 0px; /*30px;*/
 }
 
 table.publications td:nth-child(2) {
@@ -39,13 +40,16 @@ table.publications img {
 	border:solid black;
 	border-width:1px;
 	width:100%;
+	max-width: 220px;
 	box-shadow: 5px 5px 5px #888888;
 	image-rendering: -webkit-optimize-contrast;
+	padding: 0px;
 }
 
 table.publications img#nobox {
 	border:none;
 	width:100%;
+	max-width: 220px;
 	box-shadow: none;
 }
 
@@ -163,6 +167,7 @@ table.talks tr:hover {
 table.talks td#logo {
 	text-align: center;
 	vertical-align: middle;
+	/* width: 80px; */
 }
 
 table.talks span {
@@ -214,10 +219,15 @@ table.teaching {
 	text-align:"center";
 	border:"0";
 	margin-left:40px;
+	vertical-align: top;
 }
 
 table.teaching tr:hover {
 	background-color: #fafafa;
+}
+
+table.teaching td {
+	vertical-align: top;
 }
 
 /* ----------- BACKGROUND ITEMS ----------- */
