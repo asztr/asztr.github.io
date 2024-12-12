@@ -41,26 +41,26 @@
 					<h2>Alejandro Sztrajman</h2>
 					<table>
 						I'm a postdoctoral research associate
-						in the <a href="https://www.cl.cam.ac.uk/research/rainbow/">Rainbow Group</a>
+						<!-- in the <a href="https://www.cl.cam.ac.uk/research/rainbow/">Rainbow Group</a> -->
 						at the
 						<a href="https://www.cam.ac.uk/">University of Cambridge</a>, where I work with Profs.
 						<a href="https://www.cl.cam.ac.uk/~aco41/">Cengiz Öztireli</a> and
 						<a href="https://www.cl.cam.ac.uk/~rkm38/">Rafał Mantiuk</a>.
 						I hold a PhD in Computer Science
 						<!--in the <a href="http://www.cs.ucl.ac.uk/research/vr/">Virtual Environments and Computer Graphics Group</a>-->
-						from <a href="http://www.ucl.ac.uk/">University College London</a> (UCL), where I worked at the
+						from <a href="http://www.ucl.ac.uk/">University College London</a> (UCL), where I was part of the
 						<a href="http://reality.cs.ucl.ac.uk/home.html">Digital Reality Lab</a>,
 						under the supervision of Profs.
 						<a href="http://reality.cs.ucl.ac.uk/weyrich.php">Tim Weyrich</a> and
 						<a href="http://www.homepages.ucl.ac.uk/~ucactri/">Tobias Ritschel</a>.
 						My research is in the intersection between machine learning and visual computing,
-						combining methods from neural fields, hypernetworks, physically-based rendering
-						and generative models.
+						combining methods from 3D generative AI, physics-based rendering and neural fields.
+						<!-- neural fields, hypernetworks, physically-based rendering and generative models. -->
 						<!--representation of photorealistic material appearance and scene illumination.-->
 						<!-- appearance acquisition, visual perception, material synthesis, efficient rendering -->
 						My PhD project was funded by a
-						<a href="https://marie-sklodowska-curie-actions.ec.europa.eu/">Marie Curie Fellowship</a>,
-						granted by the European Commission.
+						<a href="https://marie-sklodowska-curie-actions.ec.europa.eu/">Marie Curie Fellowship</a>.
+						<!-- granted by the European Commission. -->
 						<!--in the context of the
 						<a href="http://www.distro-itn.eu/">DISTRO ITN</a>.-->
 						During my PhD I also worked as research intern at
@@ -101,6 +101,7 @@
 			</tr>
 		</table>
 		<!-- ################################################################ -->
+
 		<h2 id="publications">Publications</h2>
 		<table class="publications">
 			<tr>
@@ -120,6 +121,10 @@
 					<br>
 					<span id="venue">In Review, 2024.</span><br>
 					<div id="keywords">Keywords: <keys>Vision-Language Models (VLMs), Generative AI, Neural Fields, Material Appearance.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>High-quality material synthesis is essential for replicating complex surface properties to create realistic digital scenes. However, existing methods often suffer from inefficiencies in time and memory, require domain expertise, or demand extensive training data, with high-dimensional material data further constraining performance. Additionally, most approaches lack multi-modal guidance capabilities and standardized evaluation metrics, limiting control and comparability in synthesis tasks. To address these limitations, we propose NeuMaDiff, a novel neural material synthesis framework utilizing hyperdiffusion. Our method employs neural fields as a low-dimensional representation and incorporates a multi-modal conditional hyperdiffusion model to learn the distribution over material weights. This enables flexible guidance through inputs such as material type, text descriptions, or reference images, providing greater control over synthesis. To support future research, we contribute two new material datasets and introduce two BRDF distributional metrics for more rigorous evaluation. We demonstrate the effectiveness of NeuMaDiff through extensive experiments, including a novel statistics-based constrained synthesis approach, which enables the generation of materials of desired categories.</p>
+					</details>
 					<div id="links">
 						<a href="https://arxiv.org/abs/2411.12015">arXiv</a>
 						<a href="https://arxiv.org/pdf/2411.12015">PDF</a>
@@ -147,6 +152,10 @@
 					<br>
 					<span id="venue">In Review, 2024.</span><br>
 					<div id="keywords">Keywords: <keys>Physics-Informed Neural Networks, Neural Fields, Physics-based Rendering.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>We introduce the physically based neural bidirectional reflectance distribution function (PBNBRDF), a novel, continuous representation for material appearance based on neural fields. Our model accurately reconstructs real-world materials while uniquely enforcing physical properties for realistic BRDFs, specifically Helmholtz reciprocity via reparametrization and energy passivity via efficient analytical integration. We conduct a systematic analysis demonstrating the benefits of adhering to these physical laws on the visual quality of reconstructed materials. Additionally, we enhance the color accuracy of neural BRDFs by introducing chromaticity enforcement supervising the norms of RGB channels. Through both qualitative and quantitative experiments on multiple databases of measured real-world BRDFs, we show that adhering to these physical constraints enables neural fields to more faithfully and stably represent the original data and achieve higher rendering quality.</p>
+					</details>
 					<div id="links">
 						<a href="https://arxiv.org/abs/2411.02347">arXiv</a>
 						<a href="https://arxiv.org/pdf/2411.02347">PDF</a>
@@ -173,6 +182,10 @@
 					<br>
 					<span id="venue">European Conference on Computer Vision (ECCV), 2024.</span><br>
 					<div id="keywords">Keywords: <keys>Diffusion Models, 3D Point Clouds.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>We propose FrePolad: frequency-rectified point latent diffusion, a point cloud generation pipeline integrating a variational autoencoder (VAE) with a denoising diffusion probabilistic model (DDPM) for the latent distribution. FrePolad simultaneously achieves high quality, diversity, and flexibility in point cloud cardinality for generation tasks while maintaining high computational efficiency. The improvement in generation quality and diversity is achieved through (1) a novel frequency rectification via spherical harmonics designed to retain high-frequency content while learning the point cloud distribution; and (2) a latent DDPM to learn the regularized yet complex latent distribution. In addition, FrePolad supports variable point cloud cardinality by formulating the sampling of points as conditional distributions over a latent shape distribution. Finally, the low-dimensional latent space encoded by the VAE contributes to FrePolad's fast and scalable sampling. Our quantitative and qualitative results demonstrate FrePolad's state-of-the-art performance in terms of quality, diversity, and computational efficiency.</p>
+					</details>
 					<div id="links">
 						<a href="https://chenliang-zhou.github.io/FrePolad">Project</a>
 						<a href="https://arxiv.org/abs/2311.12090">arXiv</a>
@@ -199,6 +212,10 @@
 					<br>
 					<span id="venue">European Conference on Computer Vision (ECCV), 2024.</span><br>
 					<div id="keywords">Keywords: <keys>Neural Fields, Hypernetworks, Generalizable Models, Material Appearance.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>In this paper, we introduce a technique to estimate measured BRDFs from a sparse set of samples. Our approach offers accurate BRDF reconstructions that are generalizable to new materials. This opens the door to BRDF reconstructions from a variety of data sources. The success of our approach relies on the ability of hypernetworks to generate a robust representation of BRDFs and a set encoder that allows us to feed inputs of different sizes to the architecture. The set encoder and the hypernetwork also enable the compression of densely sampled BRDFs. We evaluate our technique both qualitatively and quantitatively on the well-known MERL dataset of 100 isotropic materials. Our approach accurately 1) estimates the BRDFs of unseen materials even for an extremely sparse sampling, 2) compresses the measured BRDFs into very small embeddings, e.g., 7D.</p>
+					</details>
 					<div id="links">
 						<a href="https://faziletgokbudak.github.io/HyperBRDF/">Project</a>
 						<a href="https://arxiv.org/abs/2311.15783">arXiv</a>
@@ -225,6 +242,10 @@
 					<br>
 					<span id="venue">Transactions on Machine Learning Research (TMLR), 2024.</span><br>
 					<div id="keywords">Keywords: <keys>Time-series, Neural Fields, Generative Models, Interpretability, Hypernetworks.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>Implicit neural representations (INRs) have emerged as a powerful tool that provides an accurate and resolution-independent encoding of data. Their robustness as general approximators has been shown across diverse data modalities, such as images, video, audio, and 3D scenes. However, little attention has been given to leveraging these architectures for time series data. Addressing this gap, we propose an approach for time series generation based on two novel architectures: TSNet, an INR network for interpretable trend-seasonality time series representation, and iHyperTime, a hypernetwork architecture that leverages TSNet for time series generalization and synthesis. Through evaluations of fidelity and usefulness metrics, we demonstrate that iHyperTime outperforms current state-of-the-art methods in challenging scenarios that involve long or irregularly sampled time series, while performing on par on regularly sampled data. Furthermore, we showcase iHyperTime fast training speed, comparable to the fastest existing methods for short sequences and significantly superior for longer ones. Finally, we empirically validate the quality of the model's unsupervised trend-seasonality decomposition by comparing against the well-established STL method.</p>
+					</details>
 					<div id="links">
 						<a href="https://openreview.net/forum?id=GSnGPgeoS5">OpenReview</a>
 						<a href="https://openreview.net/pdf?id=GSnGPgeoS5">PDF</a>
@@ -255,6 +276,10 @@
 					<br>
 					<span id="venue">Conference on Neural Information Processing Systems (NeurIPS), 2023.</span><br>
 					<div id="keywords">Keywords: <keys>Neural Fields, Hypernetworks, Constrained Learning.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>While deep learning techniques have become extremely popular for solving a broad range of optimization problems, methods to enforce hard constraints during optimization, particularly on deep neural networks, remain underdeveloped. Inspired by the rich literature on meshless interpolation and its extension to spectral collocation methods in scientific computing, we develop a series of approaches for enforcing hard constraints on neural fields, which we refer to as Constrained Neural Fields (CNF). The constraints can be specified as a linear operator applied to the neural field and its derivatives. We also design specific model representations and training strategies for problems where standard models may encounter difficulties, such as conditioning of the system, memory consumption, and capacity of the network when being constrained. Our approaches are demonstrated in a wide range of real-world applications. Additionally, we develop a framework that enables highly efficient model and constraint specification, which can be readily applied to any downstream task where hard constraints need to be explicitly satisfied during optimization.</p>
+					</details>
 					<div id="links">
 						<a href="https://zfc946.github.io/CNF.github.io/">Project</a>
 						<a href="https://arxiv.org/abs/2306.08943">arXiv</a>
@@ -282,6 +307,10 @@
 					<br>
 					<span id="venue">Electronic Imaging, 2023.</span><br>
 					<div id="keywords">Keywords: <keys>Color Correction, Implicit Neural Representations.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>Accurate color reproduction on a display requires an inverse display model, mapping colorimetric values (e.g. CIE XYZ) into RGB values driving the display. To create such a model, we collected a large dataset of display color measurements for a high refresh-rate 4-primary OLED display. We demonstrated that, unlike traditional LCD displays, multi-primary OLED display color responses are non-additive and non-linear for some colors. We tested the performances of different regression methods: polynomial regression, look-up tables, multi-layer perceptrons, and others. The best-performing models were additionally validated on newly measured (unseen) test colors. We found that the performances of several variations of 4th-degree polynomial models were comparable to the look-up table and machine-learning-based models while being less resource-intensive.</p>
+					</details>
 					<div id="links">
 						<a href="https://library.imaging.org/ei/articles/36/16/COLOR-166">Page</a>
 						<a href="https://www.cl.cam.ac.uk/~rkm38/pdfs/ashraf2023_oled_calibration.pdf">PDF</a>
@@ -305,6 +334,10 @@
 					<br>
 					<span id="venue">NeurIPS SyntheticData4ML, 2022.</span><br>
 					<div id="keywords">Keywords: <keys>Time-series, Neural Fields, Signal Processing, Hypernetworks.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>Implicit neural representations (INRs) have recently emerged as a powerful tool that provides an accurate and resolution-independent encoding of data. Their robustness as general approximators has been shown in a wide variety of data sources, with applications on image, sound, and 3D scene representation. However, little attention has been given to leveraging these architectures for the representation and analysis of time series data. In this paper, we analyze the representation of time series using INRs, comparing different activation functions in terms of reconstruction accuracy and training convergence speed. Secondly, we propose a hypernetwork architecture that leverages INRs to learn a compressed latent representation of an entire time series dataset. We introduce an FFT-based loss to guide training so that all frequencies are preserved in the time series. 						We show that this network can be used to encode time series as INRs, and their embeddings can be interpolated to generate new time series from existing ones. We evaluate our generative method by using it for data augmentation, and show that it is competitive against current state-of-the-art approaches for augmentation of time series.</p>
+					</details>
 					<div id="links">
 						<a href="https://openreview.net/forum?id=DZ2FaoMhWRb">OpenReview</a>
 						<a href="https://openreview.net/pdf?id=DZ2FaoMhWRb">PDF</a>
@@ -332,6 +365,10 @@
 					<br>
 					<span id="venue">Computer Graphics Forum (CGF), 2021 (Oral Presentation at EGSR 2022).</span><br>
 					<div id="keywords">Keywords: <keys>Material Appearance, Neural Fields, Meta-learning, Hypernetworks, Differentiable Rendering, Monte Carlo Importance Sampling.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>Controlled capture of real-world material appearance yields tabulated sets of highly realistic reflectance data. In practice, however, its high memory footprint requires compressing into a representation that can be used efficiently in rendering while remaining faithful to the original. Previous works in appearance encoding often prioritised one of these requirements at the expense of the other, by either applying high-fidelity array compression strategies not suited for efficient queries during rendering, or by fitting a compact analytic model that lacks expressiveness. We present a compact neural network-based representation of BRDF data that combines high-accuracy reconstruction with efficient practical rendering via built-in interpolation of reflectance. We encode BRDFs as lightweight networks, and propose a training scheme with adaptive angular sampling, critical for the accurate reconstruction of specular highlights. Additionally, we propose a novel approach to make our representation amenable to importance sampling: rather than inverting the trained networks, we learn an embedding that can be mapped to parameters of an analytic BRDF for which importance sampling is known. We evaluate encoding results on isotropic and anisotropic BRDFs from multiple real-world datasets, and importance sampling performance for isotropic BRDFs mapped to two different analytic models.</p>
+					</details>
 					<div id="links">
 						<a href="./publications/nbrdf2021/nbrdf.html">Project</a>
 						<!--<a href="http://arxiv.org/abs/2102.05963">arXiv</a>-->
@@ -361,6 +398,10 @@
 					<br>
 					<span id="venue">International Joint Conference on Neural Networks (IJCNN), 2022 (Oral Presentation).</span><br>
 					<div id="keywords">Keywords: <keys>Blue-Noise, Unsupervised Learning, Dithering, Monte Carlo Integration.</keys></div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>Blue noise is known for its uniformity in the spatial domain, avoiding the appearance of structures such as voids and clusters. Because of this characteristic, it has been adopted in a wide range of visual computing applications, such as image dithering, rendering and visualisation. This has motivated the development of a variety of generative methods for blue noise, with different trade-offs in terms of accuracy and computational performance. We propose a novel unsupervised learning approach that leverages a neural network architecture to generate blue noise masks with high accuracy and real-time performance, starting from a white noise input. We train our model by combining three unsupervised losses that work by conditioning the Fourier spectrum and intensity histogram of noise masks predicted by the network. We evaluate our method by leveraging the generated noise for two applications: grayscale blue noise masks for image dithering, and blue noise samples for Monte Carlo integration.</p>
+					</details>
 					<div id="links">
 						<a href="./publications/ijcnn2022/ijcnn2022.html">Project</a>
 						<a href="./publications/ijcnn2022/ijcnn2022-preprint.pdf">PDF</a>
@@ -387,8 +428,11 @@
 						Reviewers: Profs.
 						<a href="https://scholar.google.co.uk/citations?hl=en&user=IRMX4-4AAAAJ">Lourdes Agapito</a> and
 						<a href="http://giga.cps.unizar.es/~diegog/">Diego Gutierrez</a>.
-					</div>
-					<br>
+					</div><br>
+					<details>
+						<summary>Abstract 🢒</summary>
+						<p>In this thesis, we address multiple applications of machine learning in appearance modelling. We do so by leveraging data-driven approaches, guided through the use of image-based error metrics, to generate new representations of material appearance and scene illumination. We first address the interchange of material appearance between different analytic representations, through an image-based optimisation of BRDF model parameters. We analyse the method in terms of stability with respect to variations of the BRDF parameters, and show that it can be used for material interchange between different renderers and workflows, without the need to access shader implementations. We extend our method to enable the remapping of spatially-varying materials, by presenting two regression schemes that allow us to learn the transformation of parameters between models and apply it to texture maps at fast rates. Next, we centre on the efficient representation and rendering of measured material appearance. We develop a neural-based BRDF representation that provides high-quality reconstruction with low storage and competitive evaluation times, comparable with analytic models. Our method compares favourably against other representations in terms of reconstruction accuracy, and we show that it can be also used to encode anisotropic materials. In addition, we generate a unified encoding of real-world materials via a meta-learning autoencoder architecture guided by a differential rendering loss. This enables the generation of new realistic materials by interpolation of embeddings, and the fast estimation of material properties. We show that this can be leveraged for efficient rendering through importance sampling, by predicting the parameters of an invertible analytic BRDF model. Finally, we design a hybrid representation for high-dynamic-range illumination that combines a convolutional autoencoder-based encoding for low-intensity light, and a parametric model for high intensity. Our model provides a flexible compact encoding for environment maps, while also preserving an accurate reconstruction of the high-intensity component, appropriate for rendering purposes. We utilise our light encodings in a second convolutional neural network trained for light prediction from single outdoor face portrait at interactive rates, with potential applications for real-time light prediction and 3D object insertion.</p>
+					</details>
 					<div id="links">
 						<a href="https://discovery.ucl.ac.uk/id/eprint/10152596">UCL Repository</a>
 						<a href="https://discovery.ucl.ac.uk/id/eprint/10152596/7/asztrajman_PhD_thesis.pdf">PDF</a>

@@ -53,6 +53,17 @@ table.publications img#nobox {
 	box-shadow: none;
 }
 
+table.publications details > summary {
+	cursor: pointer;
+	display: inline-block;
+	margin-top: 5px;
+	font-size: .8rem;
+}
+table.publications details > summary::marker {
+	display: none;
+	content: "";
+}
+
 div#links {
 	display: inline-block;
 	margin-top: 10px;
